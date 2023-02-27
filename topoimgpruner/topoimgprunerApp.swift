@@ -12,6 +12,7 @@ struct topoimgprunerApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+            
         }
     }
 }
