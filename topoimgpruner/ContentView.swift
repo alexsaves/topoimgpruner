@@ -15,10 +15,7 @@ struct ContentView: View {
                 maxWidth: .infinity,
                 alignment: .leading
             )
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            PrunerUI().frame(maxWidth: .infinity)
         }
         .padding()
         .frame(

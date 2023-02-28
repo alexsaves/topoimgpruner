@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA50FCDB29AE3ECD0086604B /* PrunerUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA50FCDA29AE3ECD0086604B /* PrunerUI.swift */; };
+		AA50FCDF29AE427B0086604B /* DirParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA50FCDE29AE427B0086604B /* DirParser.swift */; };
 		AA6AF1BD29AC335400FDC128 /* TopoFileSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6AF1BC29AC335400FDC128 /* TopoFileSelector.swift */; };
 		AA6AF1C529ADBCE300FDC128 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AA6AF1C729ADBCE300FDC128 /* Localizable.strings */; };
 		AAEE394629AC27BC002E6CC5 /* topoimgprunerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEE394529AC27BC002E6CC5 /* topoimgprunerApp.swift */; };
@@ -36,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AA50FCDA29AE3ECD0086604B /* PrunerUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrunerUI.swift; sourceTree = "<group>"; };
+		AA50FCDE29AE427B0086604B /* DirParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirParser.swift; sourceTree = "<group>"; };
 		AA6AF1BC29AC335400FDC128 /* TopoFileSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopoFileSelector.swift; sourceTree = "<group>"; };
 		AA6AF1C629ADBCE300FDC128 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AA6AF1C829ADBCFD00FDC128 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -77,6 +81,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AA50FCD929AE3EA80086604B /* Pruner */ = {
+			isa = PBXGroup;
+			children = (
+				AA50FCDA29AE3ECD0086604B /* PrunerUI.swift */,
+			);
+			path = Pruner;
+			sourceTree = "<group>";
+		};
+		AA50FCDC29AE42030086604B /* FileControl */ = {
+			isa = PBXGroup;
+			children = (
+				AA50FCDD29AE42250086604B /* Parser */,
+				AA6AF1BC29AC335400FDC128 /* TopoFileSelector.swift */,
+			);
+			path = FileControl;
+			sourceTree = "<group>";
+		};
+		AA50FCDD29AE42250086604B /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				AA50FCDE29AE427B0086604B /* DirParser.swift */,
+			);
+			path = Parser;
+			sourceTree = "<group>";
+		};
 		AA6AF1C029ADBB6600FDC128 /* Localizables */ = {
 			isa = PBXGroup;
 			children = (
@@ -108,13 +137,14 @@
 		AAEE394429AC27BC002E6CC5 /* topoimgpruner */ = {
 			isa = PBXGroup;
 			children = (
+				AA50FCDC29AE42030086604B /* FileControl */,
+				AA50FCD929AE3EA80086604B /* Pruner */,
 				AA6AF1C029ADBB6600FDC128 /* Localizables */,
 				AAEE394529AC27BC002E6CC5 /* topoimgprunerApp.swift */,
 				AAEE394729AC27BC002E6CC5 /* ContentView.swift */,
 				AAEE394929AC27BC002E6CC5 /* Assets.xcassets */,
 				AAEE394E29AC27BC002E6CC5 /* topoimgpruner.entitlements */,
 				AAEE394B29AC27BC002E6CC5 /* Preview Content */,
-				AA6AF1BC29AC335400FDC128 /* TopoFileSelector.swift */,
 			);
 			path = topoimgpruner;
 			sourceTree = "<group>";
@@ -279,6 +309,8 @@
 				AA6AF1BD29AC335400FDC128 /* TopoFileSelector.swift in Sources */,
 				AAEE394829AC27BC002E6CC5 /* ContentView.swift in Sources */,
 				AAEE394629AC27BC002E6CC5 /* topoimgprunerApp.swift in Sources */,
+				AA50FCDB29AE3ECD0086604B /* PrunerUI.swift in Sources */,
+				AA50FCDF29AE427B0086604B /* DirParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

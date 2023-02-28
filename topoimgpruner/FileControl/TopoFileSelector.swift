@@ -10,8 +10,13 @@ import Cocoa
 
 struct TopoFileSelector: View {
     
+    // The default "no source set" string
     let noSourceStr = NSLocalizedString("chooseSourceDefault", comment: "Default text for choosing a source")
+    
+    // The folder name that has been set
     @State var folderName : String = ""
+    
+    // Whether we are ready to parse
     @State var parseReady = false
     
     /*
@@ -45,7 +50,13 @@ struct TopoFileSelector: View {
             }
             Text(folderName.count > 0 ? folderName : noSourceStr)
             HStack {
-                Button(NSLocalizedString("parseButton", comment: "Button for parsing a folder")) {}.disabled(!parseReady)
+                Button(NSLocalizedString("parseButton", comment: "Button for parsing a folder")) {
+                    if parseReady {
+                        print("parsing...");
+                        let parser = DirParser(root: folderName)
+                        
+                    }
+                }.disabled(!parseReady)
                 Button(NSLocalizedString("exportButton", comment: "Button for exporting a project")) {}.disabled(true)
             }.frame(maxWidth: .infinity, alignment: .trailing)
         }
