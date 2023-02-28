@@ -49,7 +49,6 @@ struct TopoFileSelector: View {
                 Button(NSLocalizedString("exportButton", comment: "Button for exporting a project")) {}.disabled(true)
             }.frame(maxWidth: .infinity, alignment: .trailing)
         }
-        .border(Color.pink)
     }
 }
 
