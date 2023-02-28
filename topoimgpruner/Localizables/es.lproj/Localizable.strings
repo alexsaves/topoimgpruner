@@ -1,0 +1,14 @@
+/* 
+  Localizable.strings
+  topoimgpruner
+
+  Created by Alexei White on 2/27/23.
+  
+*/
+"windowTitle" = "Podador de Imágenes Topográficas";
+"chooseSourceDefault" = "[Elija una carpeta de origen]";
+"chooseRootFolder" = "Elija una carpeta raíz";
+"chooseRootFolderLong" = "Elija una carpeta para rastrear imágenes";
+"srcFolderButton" = "Carpeta de origen";
+"parseButton" = "Ir";
+"exportButton" = "Exportar a…";

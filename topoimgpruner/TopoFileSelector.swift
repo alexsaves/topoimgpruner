@@ -10,7 +10,7 @@ import Cocoa
 
 struct TopoFileSelector: View {
     
-    let noSourceStr = "[Choose a source]"
+    let noSourceStr = NSLocalizedString("chooseSourceDefault", comment: "Default text for choosing a source")
     @State var folderName : String = ""
     @State var parseReady = false
     
@@ -22,8 +22,8 @@ struct TopoFileSelector: View {
         panel.allowsMultipleSelection = false
         panel.canChooseDirectories = true
         panel.canChooseFiles = false
-        panel.title = "Choose a root folder"
-        panel.message = "Choose a folder to crawl for images"
+        panel.title = NSLocalizedString("chooseRootFolder", comment: "File picker root folder title")
+        panel.message =  NSLocalizedString("chooseRootFolderLong", comment: "File picker root folder title long description")
         if panel.runModal() == .OK {
             return panel.url?.absoluteString ?? ""
         }
@@ -35,7 +35,7 @@ struct TopoFileSelector: View {
      */
     var body: some View {
         HStack {
-            Button("Src Folder") {
+            Button(NSLocalizedString("srcFolderButton", comment: "Choose a source folder button label")) {
                 folderName = browseFiles()
                 if folderName.count > 0 {
                     parseReady = true
@@ -45,8 +45,8 @@ struct TopoFileSelector: View {
             }
             Text(folderName.count > 0 ? folderName : noSourceStr)
             HStack {
-                Button("Parse") {}.disabled(!parseReady)
-                Button("Export to…") {}.disabled(true)
+                Button(NSLocalizedString("parseButton", comment: "Button for parsing a folder")) {}.disabled(!parseReady)
+                Button(NSLocalizedString("exportButton", comment: "Button for exporting a project")) {}.disabled(true)
             }.frame(maxWidth: .infinity, alignment: .trailing)
         }
         .border(Color.pink)

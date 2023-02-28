@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AA6AF1BD29AC335400FDC128 /* TopoFileSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6AF1BC29AC335400FDC128 /* TopoFileSelector.swift */; };
+		AA6AF1C529ADBCE300FDC128 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AA6AF1C729ADBCE300FDC128 /* Localizable.strings */; };
 		AAEE394629AC27BC002E6CC5 /* topoimgprunerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEE394529AC27BC002E6CC5 /* topoimgprunerApp.swift */; };
 		AAEE394829AC27BC002E6CC5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEE394729AC27BC002E6CC5 /* ContentView.swift */; };
 		AAEE394A29AC27BC002E6CC5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AAEE394929AC27BC002E6CC5 /* Assets.xcassets */; };
@@ -36,6 +37,8 @@
 
 /* Begin PBXFileReference section */
 		AA6AF1BC29AC335400FDC128 /* TopoFileSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopoFileSelector.swift; sourceTree = "<group>"; };
+		AA6AF1C629ADBCE300FDC128 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AA6AF1C829ADBCFD00FDC128 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AAEE394229AC27BC002E6CC5 /* topoimgpruner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = topoimgpruner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAEE394529AC27BC002E6CC5 /* topoimgprunerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = topoimgprunerApp.swift; sourceTree = "<group>"; };
 		AAEE394729AC27BC002E6CC5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -74,6 +77,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AA6AF1C029ADBB6600FDC128 /* Localizables */ = {
+			isa = PBXGroup;
+			children = (
+				AA6AF1C729ADBCE300FDC128 /* Localizable.strings */,
+			);
+			path = Localizables;
+			sourceTree = "<group>";
+		};
 		AAEE393929AC27BC002E6CC5 = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +108,7 @@
 		AAEE394429AC27BC002E6CC5 /* topoimgpruner */ = {
 			isa = PBXGroup;
 			children = (
+				AA6AF1C029ADBB6600FDC128 /* Localizables */,
 				AAEE394529AC27BC002E6CC5 /* topoimgprunerApp.swift */,
 				AAEE394729AC27BC002E6CC5 /* ContentView.swift */,
 				AAEE394929AC27BC002E6CC5 /* Assets.xcassets */,
@@ -218,6 +230,7 @@
 			knownRegions = (
 				en,
 				Base,
+				es,
 			);
 			mainGroup = AAEE393929AC27BC002E6CC5;
 			productRefGroup = AAEE394329AC27BC002E6CC5 /* Products */;
@@ -237,6 +250,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AAEE394D29AC27BC002E6CC5 /* Preview Assets.xcassets in Resources */,
+				AA6AF1C529ADBCE300FDC128 /* Localizable.strings in Resources */,
 				AAEE394A29AC27BC002E6CC5 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -300,11 +314,24 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		AA6AF1C729ADBCE300FDC128 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AA6AF1C629ADBCE300FDC128 /* en */,
+				AA6AF1C829ADBCFD00FDC128 /* es */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		AAEE396529AC27BC002E6CC5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -365,6 +392,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";

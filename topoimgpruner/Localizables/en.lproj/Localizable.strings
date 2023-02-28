@@ -1,0 +1,14 @@
+/* 
+  Localizable.strings
+  topoimgpruner
+
+  Created by Alexei White on 2/27/23.
+  
+*/
+"windowTitle" = "Topographical Image Pruner";
+"chooseSourceDefault" = "[Choose a source folder]";
+"chooseRootFolder" = "Choose a root folder";
+"chooseRootFolderLong" = "Choose a folder to crawl for images";
+"srcFolderButton" = "Source folder";
+"parseButton" = "Parse";
+"exportButton" = "Export to…";
