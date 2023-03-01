@@ -1,5 +1,5 @@
 # topoimgpruner
-![](https://github.com/alexsaves/topoimgpruner/blob/main/images/map-svgrepo-com.png?raw=true | width=100)
+[](https://github.com/alexsaves/topoimgpruner/blob/main/images/map-svgrepo-com.png?raw=true | width=100)
 Topographic Image Pruner for MacOS
 
 Supports MacOS Ventura+
