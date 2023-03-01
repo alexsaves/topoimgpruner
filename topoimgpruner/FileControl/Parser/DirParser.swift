@@ -54,7 +54,7 @@ class DirParser {
      * Produce a finished list of jpegs
      */
     private func filterValidAerialJPEGS(filesToCheck: [String]) -> [AerialImageFile] {
-        var _finalImageSet: [AerialImageFile] = []
+        let _finalImageSet: [AerialImageFile] = []
         
         return _finalImageSet
     }
@@ -63,13 +63,13 @@ class DirParser {
     * Start a parse operation
      */
     func parse() -> [AerialImageFile] {
-        var _filesToCheck: [String] = crawlForFiles()
+        let _filesToCheck: [String] = crawlForFiles()
         if _filesToCheck.count == 0 {
             // Error on scan
             events.trigger(eventName: "error", information: "Found no eligible files to scan")
             return []
         } else {
-            var _finalImageSet: [AerialImageFile] = filterValidAerialJPEGS(filesToCheck: _filesToCheck)
+            let _finalImageSet: [AerialImageFile] = filterValidAerialJPEGS(filesToCheck: _filesToCheck)
             if _filesToCheck.count == 0 {
                 // Error on scan
                 events.trigger(eventName: "error", information: "Found no eligible aerial images from scan")
