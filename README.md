@@ -1,5 +1,5 @@
 # topoimgpruner
-![TopoImagePruner Logo](https://gyazo.com/eb5c5741b6a9a16c692170a41a49c858.png | width=100)
+![TopoImagePruner Logo](https://github.com/alexsaves/topoimgpruner/blob/main/images/128map-svgrepo-com.png?raw=true)
 
 Topographic Image Pruner for MacOS
 
