@@ -11,7 +11,6 @@ import SwiftUI
 struct topoimgprunerApp: App {
     var body: some Scene {
         WindowGroup {
-            //ContentView().navigationTitle(HomeString.windowTitle.localized)
             ContentView().navigationTitle(NSLocalizedString("windowTitle", comment: "The window title"))
             
         }

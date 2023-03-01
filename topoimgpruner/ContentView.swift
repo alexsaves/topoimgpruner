@@ -8,14 +8,36 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    // The folder name that has been set
+    @State var errorMessage : String = ""
+    
+    // Whether we are ready to parse
+    @State var hasError = false
+    
+    /**
+     * Master error handler
+     */
+    private func errorHandler(information:String) {
+        hasError = true
+        errorMessage = information
+        print("Master error handler")
+        print(information)
+    }
+    
+    
     var body: some View {
         VStack() {
-            TopoFileSelector().frame(
+            TopoFileSelector(errorHandler: errorHandler).frame(
                 minWidth: 0,
                 maxWidth: .infinity,
                 alignment: .leading
             )
-            PrunerUI().frame(maxWidth: .infinity)
+            if hasError {
+                Text("Err: \(errorMessage)").foregroundColor(Color.red).frame(maxWidth: .infinity)
+            } else {
+                PrunerUI().frame(maxWidth: .infinity)
+            }
         }
         .padding()
         .frame(

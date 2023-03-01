@@ -12,7 +12,7 @@ struct PrunerUI: View {
         VStack {
             HStack {
                 Image("Logo").resizable()
-                    .frame(width: 50.0, height: 50.0).opacity(0.3)
+                    .frame(width: 50.0, height: 50.0).opacity(0.2)
             }
         }
         .frame(

@@ -8,8 +8,7 @@
 import SwiftUI
 import Cocoa
 
-struct TopoFileSelector: View {
-    
+struct TopoFileSelector: View {    
     // The default "no source set" string
     let noSourceStr = NSLocalizedString("chooseSourceDefault", comment: "Default text for choosing a source")
     
@@ -30,9 +29,28 @@ struct TopoFileSelector: View {
         panel.title = NSLocalizedString("chooseRootFolder", comment: "File picker root folder title")
         panel.message =  NSLocalizedString("chooseRootFolderLong", comment: "File picker root folder title long description")
         if panel.runModal() == .OK {
-            return panel.url?.absoluteString ?? ""
+            return panel.url?.path ?? ""
         }
         return folderName
+    }
+    
+    // Holds the error handler
+    private let _errorHandler: (String) -> Void
+    
+    /**
+     * Handle error emitted
+     */
+    private func emitError(information:Any?) {        
+        if let info = information as? String {
+            _errorHandler(info)
+        }
+    }
+    
+    /**
+     * Set up a new instance with an error handler
+     */
+    init(errorHandler: @escaping (String) -> Void) {
+        _errorHandler = errorHandler
     }
     
     /*
@@ -54,7 +72,8 @@ struct TopoFileSelector: View {
                     if parseReady {
                         print("parsing...");
                         let parser = DirParser(root: folderName)
-                        
+                        parser.events.subscribeTo(eventName: "error", action:emitError)
+                        parser.parse()
                     }
                 }.disabled(!parseReady)
                 Button(NSLocalizedString("exportButton", comment: "Button for exporting a project")) {}.disabled(true)
@@ -64,7 +83,8 @@ struct TopoFileSelector: View {
 }
 
 struct TopoFileSelector_Previews: PreviewProvider {
+    static func errHandler(info:String) {}
     static var previews: some View {
-        TopoFileSelector()
+        TopoFileSelector(errorHandler: errHandler)
     }
 }
