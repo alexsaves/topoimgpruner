@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreImage
 
 class DirParser {
     
@@ -28,14 +29,12 @@ class DirParser {
     private func crawlForFiles() -> [String] {
         var _filesToCheck: [String] = []
         let fm = FileManager.default
-        //print("Scanning folder \(rootFolder)...")
         do {
             let url = URL(fileURLWithPath: rootFolder)
             if let enumerator = fm.enumerator(at: url, includingPropertiesForKeys: [.isRegularFileKey], options: [.skipsHiddenFiles, .skipsPackageDescendants]) {
                 for case let fileURL as URL in enumerator {
                     let fileAttributes = try fileURL.resourceValues(forKeys:[.isRegularFileKey])
                     if fileAttributes.isRegularFile! {
-                        //print("Looking at regular file \(fileURL.path).")
                         if !_filesToCheck.contains(fileURL.path) {
                             _filesToCheck.append(fileURL.path)
                         }
@@ -54,8 +53,48 @@ class DirParser {
      * Produce a finished list of jpegs
      */
     private func filterValidAerialJPEGS(filesToCheck: [String]) -> [AerialImageFile] {
-        let _finalImageSet: [AerialImageFile] = []
-        
+        var _finalImageSet: [AerialImageFile] = []
+        let countOfImgs = filesToCheck.count;
+        var progressCounter = 0;
+        let parseMsg = NSLocalizedString("parseProgress", comment: "Default text for choosing a source")
+        for imgSrcUrl in filesToCheck {
+            progressCounter += 1
+            let url = URL(fileURLWithPath: imgSrcUrl)
+            if (url.pathExtension.uppercased() == "JPG") {
+                events.trigger(eventName: "progress", information: "\(parseMsg) \(progressCounter)/\(countOfImgs) '\(imgSrcUrl)'")
+                //let context = CIContext()
+                let ciImage = CIImage(contentsOf: url)
+                if (ciImage != nil) {
+                    let props:[String: Any] = ciImage!.properties
+                    var imgW:Int32 = 0,
+                        imgH:Int32 = 0,
+                        orientation:Int32  = 0
+                    
+                    var i = props["PixelWidth"] as? Int32
+                    if let unwrap = i {
+                        imgW = unwrap
+                    }
+                    
+                    i = props["PixelHeight"] as? Int32
+                    if let unwrap = i {
+                        imgH = unwrap
+                    }
+                    
+                    i = props["Orientation"] as? Int32
+                    if let unwrap = i {
+                        orientation = unwrap
+                    }
+// FIGURE OUT ANGLE IF ITS VALID
+                    let aImg = AerialImageFile(fileUrl: imgSrcUrl, imageWidth: imgW, imageHeight: imgH)
+                    print(props.count)
+                    _finalImageSet.append(aImg)
+                }
+            }
+
+            
+            
+            print(imgSrcUrl);
+        }
         return _finalImageSet
     }
     

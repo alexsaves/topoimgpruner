@@ -12,3 +12,5 @@
 "srcFolderButton" = "Carpeta de origen";
 "parseButton" = "Ir";
 "exportButton" = "Exportar a…";
+"parseProgressInit" = "Inicializando…";
+"parseProgress" = "Análisis:";

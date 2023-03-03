@@ -196,6 +196,8 @@
 			dependencies = (
 			);
 			name = topoimgpruner;
+			packageProductDependencies = (
+			);
 			productName = topoimgpruner;
 			productReference = AAEE394229AC27BC002E6CC5 /* topoimgpruner.app */;
 			productType = "com.apple.product-type.application";
@@ -269,6 +271,8 @@
 				es,
 			);
 			mainGroup = AAEE393929AC27BC002E6CC5;
+			packageReferences = (
+			);
 			productRefGroup = AAEE394329AC27BC002E6CC5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";

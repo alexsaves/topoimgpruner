@@ -18,6 +18,12 @@ struct TopoFileSelector: View {
     // Whether we are ready to parse
     @State var parseReady = false
     
+    // Are we in a parsing state?
+    @State var isParsing = false
+    
+    // Messages the parse progress
+    @State var parseProgress = NSLocalizedString("parseProgressInit", comment: "Default text for choosing a source")
+    
     /*
      Launch the file selector
      */
@@ -46,6 +52,12 @@ struct TopoFileSelector: View {
         }
     }
     
+    private func handleProgress(information:Any?) {
+        if let info = information as? String {
+            parseProgress = info
+        }
+    }
+    
     /**
      * Set up a new instance with an error handler
      */
@@ -66,13 +78,18 @@ struct TopoFileSelector: View {
                     parseReady = false
                 }
             }
-            Text(folderName.count > 0 ? folderName : noSourceStr)
+            if isParsing {
+                Text(parseProgress)
+            } else {
+                Text(folderName.count > 0 ? folderName : noSourceStr)
+            }
             HStack {
                 Button(NSLocalizedString("parseButton", comment: "Button for parsing a folder")) {
                     if parseReady {
-                        print("parsing...");
+                        isParsing = true
                         let parser = DirParser(root: folderName)
                         parser.events.subscribeTo(eventName: "error", action:emitError)
+                        parser.events.subscribeTo(eventName: "progress", action:handleProgress)
                         parser.parse()
                     }
                 }.disabled(!parseReady)

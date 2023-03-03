@@ -12,3 +12,5 @@
 "srcFolderButton" = "Source folder";
 "parseButton" = "Parse";
 "exportButton" = "Export to…";
+"parseProgressInit" = "Initializing…";
+"parseProgress" = "Parsing:";
