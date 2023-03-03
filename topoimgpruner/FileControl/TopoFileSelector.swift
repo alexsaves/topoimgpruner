@@ -91,6 +91,7 @@ struct TopoFileSelector: View {
                         parser.events.subscribeTo(eventName: "error", action:emitError)
                         parser.events.subscribeTo(eventName: "progress", action:handleProgress)
                         parser.parse()
+                        isParsing = false
                     }
                 }.disabled(!parseReady)
                 Button(NSLocalizedString("exportButton", comment: "Button for exporting a project")) {}.disabled(true)

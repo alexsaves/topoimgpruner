@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA15B3BB29B24DFA009035B1 /* AerialImageFileSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA15B3BA29B24DFA009035B1 /* AerialImageFileSet.swift */; };
+		AA15B3BD29B250DB009035B1 /* GPSInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA15B3BC29B250DB009035B1 /* GPSInfo.swift */; };
 		AA50FCDB29AE3ECD0086604B /* PrunerUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA50FCDA29AE3ECD0086604B /* PrunerUI.swift */; };
 		AA50FCDF29AE427B0086604B /* DirParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA50FCDE29AE427B0086604B /* DirParser.swift */; };
 		AA50FCE129AF10070086604B /* EventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA50FCE029AF10070086604B /* EventHandler.swift */; };
@@ -40,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AA15B3BA29B24DFA009035B1 /* AerialImageFileSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AerialImageFileSet.swift; sourceTree = "<group>"; };
+		AA15B3BC29B250DB009035B1 /* GPSInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSInfo.swift; sourceTree = "<group>"; };
 		AA50FCDA29AE3ECD0086604B /* PrunerUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrunerUI.swift; sourceTree = "<group>"; };
 		AA50FCDE29AE427B0086604B /* DirParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirParser.swift; sourceTree = "<group>"; };
 		AA50FCE029AF10070086604B /* EventHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHandler.swift; sourceTree = "<group>"; };
@@ -107,6 +111,8 @@
 			children = (
 				AA50FCDE29AE427B0086604B /* DirParser.swift */,
 				AA50FCE229AF98160086604B /* AerialImageFile.swift */,
+				AA15B3BA29B24DFA009035B1 /* AerialImageFileSet.swift */,
+				AA15B3BC29B250DB009035B1 /* GPSInfo.swift */,
 			);
 			path = Parser;
 			sourceTree = "<group>";
@@ -316,7 +322,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA15B3BB29B24DFA009035B1 /* AerialImageFileSet.swift in Sources */,
 				AA50FCE329AF98160086604B /* AerialImageFile.swift in Sources */,
+				AA15B3BD29B250DB009035B1 /* GPSInfo.swift in Sources */,
 				AA6AF1BD29AC335400FDC128 /* TopoFileSelector.swift in Sources */,
 				AA50FCE129AF10070086604B /* EventHandler.swift in Sources */,
 				AAEE394829AC27BC002E6CC5 /* ContentView.swift in Sources */,

@@ -7,16 +7,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "BDCCA60D-19E7-4B82-B2D5-D520A711543F"
+            uuid = "5FD9B15D-278A-4529-82FE-F0289849666C"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "topoimgpruner/FileControl/Parser/DirParser.swift"
+            filePath = "topoimgpruner/FileControl/Parser/AerialImageFileSet.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
-            landmarkName = "filterValidAerialJPEGS(filesToCheck:)"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
+            landmarkName = "calcBounds()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A3FAC641-DE17-4AAF-8BC9-265407F48FB8"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "topoimgpruner/FileControl/Parser/AerialImageFile.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "init(fileUrl:imageWidth:imageHeight:gpsInfo:exifData:thumbImg:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
