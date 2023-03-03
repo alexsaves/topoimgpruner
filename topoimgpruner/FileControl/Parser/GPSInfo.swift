@@ -7,17 +7,8 @@
 
 import Foundation
 
-enum CompassPoint {
-    case north
-    case south
-    case east
-    case west
-}
-
 struct GPSInfo {
-    var lat:Double = 0,
-        long:Double = 0,
-        altitude: Double = 0,
-        latRef:CompassPoint = CompassPoint.north,
-        longRef:CompassPoint = CompassPoint.west
+    var lat:GPSPoint = GPSPoint(),
+        long:GPSPoint = GPSPoint(),
+        altitude: GPSPoint = GPSPoint()
 }

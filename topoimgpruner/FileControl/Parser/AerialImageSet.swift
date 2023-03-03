@@ -7,10 +7,13 @@
 
 import Foundation
 
-class AerialImageFileSet {
+class AerialImageSet {
     
     // The set of images
-    var images: [AerialImageFile]
+    var images: [AerialImage]
+    
+    // The boundaries
+    var bounds: AerialImageSetBounds
     
     /**
      * Determine boundaries
@@ -25,8 +28,9 @@ class AerialImageFileSet {
     /**
      * Constructor
      */
-    init(images: [AerialImageFile]) {
+    init(images: [AerialImage]) {
         self.images = images
+        self.bounds = AerialImageSetBounds()
         calcBounds()
     }
 }

@@ -7,12 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AA15B3BB29B24DFA009035B1 /* AerialImageFileSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA15B3BA29B24DFA009035B1 /* AerialImageFileSet.swift */; };
+		AA15B3BB29B24DFA009035B1 /* AerialImageSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA15B3BA29B24DFA009035B1 /* AerialImageSet.swift */; };
 		AA15B3BD29B250DB009035B1 /* GPSInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA15B3BC29B250DB009035B1 /* GPSInfo.swift */; };
+		AA15B3BF29B25954009035B1 /* CompassPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA15B3BE29B25954009035B1 /* CompassPoint.swift */; };
+		AA15B3C129B25979009035B1 /* GPSPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA15B3C029B25979009035B1 /* GPSPoint.swift */; };
+		AA15B3C329B25A6F009035B1 /* AerialImageSetBounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA15B3C229B25A6F009035B1 /* AerialImageSetBounds.swift */; };
 		AA50FCDB29AE3ECD0086604B /* PrunerUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA50FCDA29AE3ECD0086604B /* PrunerUI.swift */; };
 		AA50FCDF29AE427B0086604B /* DirParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA50FCDE29AE427B0086604B /* DirParser.swift */; };
 		AA50FCE129AF10070086604B /* EventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA50FCE029AF10070086604B /* EventHandler.swift */; };
-		AA50FCE329AF98160086604B /* AerialImageFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA50FCE229AF98160086604B /* AerialImageFile.swift */; };
+		AA50FCE329AF98160086604B /* AerialImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA50FCE229AF98160086604B /* AerialImage.swift */; };
 		AA6AF1BD29AC335400FDC128 /* TopoFileSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6AF1BC29AC335400FDC128 /* TopoFileSelector.swift */; };
 		AA6AF1C529ADBCE300FDC128 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AA6AF1C729ADBCE300FDC128 /* Localizable.strings */; };
 		AAEE394629AC27BC002E6CC5 /* topoimgprunerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEE394529AC27BC002E6CC5 /* topoimgprunerApp.swift */; };
@@ -42,12 +45,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		AA15B3BA29B24DFA009035B1 /* AerialImageFileSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AerialImageFileSet.swift; sourceTree = "<group>"; };
+		AA15B3BA29B24DFA009035B1 /* AerialImageSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AerialImageSet.swift; sourceTree = "<group>"; };
 		AA15B3BC29B250DB009035B1 /* GPSInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSInfo.swift; sourceTree = "<group>"; };
+		AA15B3BE29B25954009035B1 /* CompassPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassPoint.swift; sourceTree = "<group>"; };
+		AA15B3C029B25979009035B1 /* GPSPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSPoint.swift; sourceTree = "<group>"; };
+		AA15B3C229B25A6F009035B1 /* AerialImageSetBounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AerialImageSetBounds.swift; sourceTree = "<group>"; };
 		AA50FCDA29AE3ECD0086604B /* PrunerUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrunerUI.swift; sourceTree = "<group>"; };
 		AA50FCDE29AE427B0086604B /* DirParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirParser.swift; sourceTree = "<group>"; };
 		AA50FCE029AF10070086604B /* EventHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHandler.swift; sourceTree = "<group>"; };
-		AA50FCE229AF98160086604B /* AerialImageFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AerialImageFile.swift; sourceTree = "<group>"; };
+		AA50FCE229AF98160086604B /* AerialImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AerialImage.swift; sourceTree = "<group>"; };
 		AA6AF1BC29AC335400FDC128 /* TopoFileSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopoFileSelector.swift; sourceTree = "<group>"; };
 		AA6AF1C629ADBCE300FDC128 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AA6AF1C829ADBCFD00FDC128 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -110,9 +116,12 @@
 			isa = PBXGroup;
 			children = (
 				AA50FCDE29AE427B0086604B /* DirParser.swift */,
-				AA50FCE229AF98160086604B /* AerialImageFile.swift */,
-				AA15B3BA29B24DFA009035B1 /* AerialImageFileSet.swift */,
+				AA50FCE229AF98160086604B /* AerialImage.swift */,
+				AA15B3BA29B24DFA009035B1 /* AerialImageSet.swift */,
 				AA15B3BC29B250DB009035B1 /* GPSInfo.swift */,
+				AA15B3BE29B25954009035B1 /* CompassPoint.swift */,
+				AA15B3C029B25979009035B1 /* GPSPoint.swift */,
+				AA15B3C229B25A6F009035B1 /* AerialImageSetBounds.swift */,
 			);
 			path = Parser;
 			sourceTree = "<group>";
@@ -322,13 +331,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA15B3BB29B24DFA009035B1 /* AerialImageFileSet.swift in Sources */,
-				AA50FCE329AF98160086604B /* AerialImageFile.swift in Sources */,
+				AA15B3BB29B24DFA009035B1 /* AerialImageSet.swift in Sources */,
+				AA50FCE329AF98160086604B /* AerialImage.swift in Sources */,
 				AA15B3BD29B250DB009035B1 /* GPSInfo.swift in Sources */,
+				AA15B3C129B25979009035B1 /* GPSPoint.swift in Sources */,
 				AA6AF1BD29AC335400FDC128 /* TopoFileSelector.swift in Sources */,
 				AA50FCE129AF10070086604B /* EventHandler.swift in Sources */,
+				AA15B3BF29B25954009035B1 /* CompassPoint.swift in Sources */,
 				AAEE394829AC27BC002E6CC5 /* ContentView.swift in Sources */,
 				AAEE394629AC27BC002E6CC5 /* topoimgprunerApp.swift in Sources */,
+				AA15B3C329B25A6F009035B1 /* AerialImageSetBounds.swift in Sources */,
 				AA50FCDB29AE3ECD0086604B /* PrunerUI.swift in Sources */,
 				AA50FCDF29AE427B0086604B /* DirParser.swift in Sources */,
 			);

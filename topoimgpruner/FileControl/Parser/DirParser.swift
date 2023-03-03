@@ -112,8 +112,8 @@ class DirParser {
     /**
      * Produce a finished list of jpegs
      */
-    private func filterValidAerialJPEGS(filesToCheck: [String]) -> AerialImageFileSet {
-        var _finalImageSet: [AerialImageFile] = []
+    private func filterValidAerialJPEGS(filesToCheck: [String]) -> AerialImageSet {
+        var _finalImageSet: [AerialImage] = []
         let countOfImgs = filesToCheck.count;
         var progressCounter = 0;
         let parseMsg = NSLocalizedString("parseProgress", comment: "Default text for choosing a source")
@@ -129,27 +129,27 @@ class DirParser {
                         GPSInfo:NSDictionary = extractDictFromAny(val: props["{GPS}"]),
                         EXIF:NSDictionary = extractDictFromAny(val: props["{Exif}"])
                     
-                    let aImg = AerialImageFile(fileUrl: imgSrcUrl, imageWidth: imgW, imageHeight: imgH, gpsInfo: GPSInfo, exifData: EXIF, thumbImg: getThumbnail(sourceImage: ciImage))
+                    let aImg = AerialImage(fileUrl: imgSrcUrl, imageWidth: imgW, imageHeight: imgH, gpsInfo: GPSInfo, exifData: EXIF, thumbImg: getThumbnail(sourceImage: ciImage))
                     
                     _finalImageSet.append(aImg)
                 }
             }
         }
-        let _finalSet = AerialImageFileSet(images: _finalImageSet)
+        let _finalSet = AerialImageSet(images: _finalImageSet)
         return _finalSet
     }
     
     /**
     * Start a parse operation
      */
-    func parse() -> AerialImageFileSet? {
+    func parse() -> AerialImageSet? {
         let _filesToCheck: [String] = crawlForFiles()
         if _filesToCheck.count == 0 {
             // Error on scan
             events.trigger(eventName: "error", information: "Found no eligible files to scan")
             return nil
         } else {
-            let _finalImageSet: AerialImageFileSet = filterValidAerialJPEGS(filesToCheck: _filesToCheck)
+            let _finalImageSet: AerialImageSet = filterValidAerialJPEGS(filesToCheck: _filesToCheck)
             if _filesToCheck.count == 0 {
                 // Error on scan
                 events.trigger(eventName: "error", information: "Found no eligible aerial images from scan")

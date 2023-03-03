@@ -11,7 +11,7 @@ import CoreImage
 /**
  * Describes a source aerial image file
  */
-class AerialImageFile {
+class AerialImage {
     // Image Pixel Width
     var width:Int32 = 0
     
@@ -76,26 +76,27 @@ class AerialImageFile {
         thumb = thumbImg
         
         // Do the GPS
-        gps.lat = extractDoubleFromAny(val: gpsInfo["Latitude"], defaultVal: 0)
-        gps.long = extractDoubleFromAny(val: gpsInfo["Longitude"], defaultVal: 0)
-        gps.altitude = extractDoubleFromAny(val: gpsInfo["Altitude"], defaultVal: 0)
+        gps.lat.val = extractDoubleFromAny(val: gpsInfo["Latitude"], defaultVal: 0)
+        gps.long.val = extractDoubleFromAny(val: gpsInfo["Longitude"], defaultVal: 0)
+        gps.altitude.val = extractDoubleFromAny(val: gpsInfo["Altitude"], defaultVal: 0)
+        gps.altitude.ref = CompassPoint.feet
         let latref = extractStrFromAny(val: gpsInfo["LatitudeRef"], defaultVal: "N")
         let longref = extractStrFromAny(val: gpsInfo["LongitudeRef"], defaultVal: "W")
         switch latref {
         case "N":
-            gps.latRef = CompassPoint.north
+            gps.lat.ref = CompassPoint.north
         case "S":
-            gps.latRef = CompassPoint.south
+            gps.lat.ref = CompassPoint.south
         default:
-            gps.latRef = CompassPoint.north
+            gps.lat.ref = CompassPoint.north
         }
         switch longref {
         case "W":
-            gps.longRef = CompassPoint.west
+            gps.long.ref = CompassPoint.west
         case "E":
-            gps.longRef = CompassPoint.east
+            gps.long.ref = CompassPoint.east
         default:
-            gps.longRef = CompassPoint.west
+            gps.long.ref = CompassPoint.west
         }
     }
 }
