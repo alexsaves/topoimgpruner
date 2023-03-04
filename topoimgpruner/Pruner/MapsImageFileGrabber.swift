@@ -27,9 +27,14 @@ class MapsImageFileGrabber {
      */
     func grabMapsImage(forSet: AerialImageSet) -> CIImage {
         var imgURLStr:String = "https://maps.googleapis.com/maps/api/staticmap?"
-        imgURLStr += "center=\(forSet.bounds.midLatitude.val),\(forSet.bounds.midLongitude.val)"
-        imgURLStr += "&zoom=\(forSet.bounds.zoom)"
-        imgURLStr += "&size=1000x1000"
+        //imgURLStr += "center=\(forSet.bounds.midLatitude.val),\(forSet.bounds.midLongitude.val)"
+        //imgURLStr += "&zoom=\(forSet.bounds.zoom)"
+        imgURLStr += "size=1000x1000"
+        var markerStr = ""
+        for aimg in forSet.images {
+            markerStr += "\(aimg.gps.lat.val),\(aimg.gps.long.val)%7C"
+        }
+        imgURLStr += "&markers=size:tiny%7Ccolor:blue%7Clabel:S%7C" + markerStr
         imgURLStr += "&maptype=hybrid"
         imgURLStr += "&key=\(API_KEY)"
         

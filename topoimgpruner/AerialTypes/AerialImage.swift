@@ -87,16 +87,19 @@ class AerialImage {
             gps.lat.ref = CompassPoint.north
         case "S":
             gps.lat.ref = CompassPoint.south
+            gps.lat.val *= -1
         default:
             gps.lat.ref = CompassPoint.north
         }
         switch longref {
         case "W":
             gps.long.ref = CompassPoint.west
+            gps.long.val *= -1
         case "E":
             gps.long.ref = CompassPoint.east
         default:
             gps.long.ref = CompassPoint.west
         }
+        print("LOCATION: \(gps.long.val),\(gps.lat.val)")
     }
 }
