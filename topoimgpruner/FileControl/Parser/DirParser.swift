@@ -11,7 +11,7 @@ import CoreImage
 class DirParser {
     
     // Holds a pubsub mechanism
-    let events = EventHandler();
+    let events = EventHandler()
     
     // Keeps track of which file we've parsed
     private var _parseIndex:Int = 0

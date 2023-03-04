@@ -20,6 +20,7 @@ class AerialImageSet {
      */
     private func calcBounds() {
         for img in images {
+            //print(img.url.absoluteString)
             let gps:GPSInfo = img.gps
             if bounds.minLatitude.ref == CompassPoint.undefined {
                 bounds.minLatitude.ref = gps.lat.ref

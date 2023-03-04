@@ -13,7 +13,10 @@ struct ContentView: View {
     @State var errorMessage : String = ""
     
     // Whether we are ready to parse
-    @State var hasError = false
+    @State var hasError: Bool = false
+    
+    // The Google Maps API Key
+    @State var GMAPS_API_KEY: String = ""
     
     /**
      * Master error handler
@@ -29,7 +32,32 @@ struct ContentView: View {
      * Receives the image set
      */
     private func imgSetReadyHandler(imgSet:AerialImageSet) {
-        print("GOT IMGS")
+        let file = "mapsapi.txt"
+
+        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+
+            let fileURL:URL = dir.appendingPathComponent(file)
+
+            do {
+                GMAPS_API_KEY = try String(contentsOf: fileURL, encoding: .utf8)
+            }
+            catch {
+                
+            }
+            if GMAPS_API_KEY.count == 0 {
+                hasError = true
+                errorMessage = NSLocalizedString("missingMapsAPIKey", comment: "The window title") + "\(fileURL.absoluteString)"
+            } else {
+                print("GOT IMGS \(GMAPS_API_KEY)")
+            }
+        }        
+    }
+    
+    /**
+     * Constructor
+     */
+    init() {
+        
     }
     
     var body: some View {

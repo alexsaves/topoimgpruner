@@ -15,3 +15,4 @@
 "parseProgressInit" = "Inicializando…";
 "parseProgress" = "Análisis:";
 "emptyImageSet" = "No se encontraron imágenes analizables";
+"missingMapsAPIKey" = "No se encontró una clave API de Google Maps. Buscado: ";
