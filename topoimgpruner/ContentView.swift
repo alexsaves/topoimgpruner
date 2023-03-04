@@ -48,6 +48,8 @@ struct ContentView: View {
                 hasError = true
                 errorMessage = NSLocalizedString("missingMapsAPIKey", comment: "The window title") + "\(fileURL.absoluteString)"
             } else {
+                let mapImgGrabber:MapsImageFileGrabber = MapsImageFileGrabber(apiKey: GMAPS_API_KEY)
+                mapImgGrabber.grabMapsImage(forSet: imgSet)
                 print("GOT IMGS \(GMAPS_API_KEY)")
             }
         }        

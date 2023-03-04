@@ -19,6 +19,7 @@ class AerialImageSet {
      * Determine boundaries
      */
     private func calcBounds() {
+        // Calculate the outer boundaries of the image set
         for img in images {
             //print(img.url.absoluteString)
             let gps:GPSInfo = img.gps
@@ -72,6 +73,26 @@ class AerialImageSet {
                 bounds.maxLongitude.val = gps.long.val
             }
         }
+        
+        // Now calculate the midpoint of the boundary
+        if bounds.minLatitude.ref == bounds.maxLatitude.ref {
+            // they are in the same hemisphere, this should be easy
+            bounds.midLatitude.val = (bounds.minLatitude.val + bounds.maxLatitude.val) / 2
+            bounds.midLatitude.ref = bounds.minLatitude.ref
+        } else {
+            // TODO: figure out cross-hemisphere midpoints
+        }
+        
+        if bounds.minLongitude.ref == bounds.maxLongitude.ref {
+            // they are in the same hemisphere, this should be easy
+            bounds.midLongitude.val = (bounds.minLongitude.val + bounds.maxLongitude.val) / 2
+            bounds.midLongitude.ref = bounds.minLatitude.ref
+        } else {
+            // TODO: figure out cross-hemisphere midpoints
+        }
+        
+        // Finally, Calculate the zoom level
+        bounds.zoom = 15;
     }
     
     /**

@@ -14,5 +14,8 @@ struct AerialImageSetBounds {
     var minLatitude: GPSPoint = GPSPoint(),
         maxLatitude: GPSPoint = GPSPoint(),
         minLongitude: GPSPoint = GPSPoint(),
-        maxLongitude: GPSPoint = GPSPoint()
+        maxLongitude: GPSPoint = GPSPoint(),
+        midLatitude: GPSPoint = GPSPoint(),
+        midLongitude: GPSPoint = GPSPoint(),
+        zoom: Int = 0
 }
