@@ -36,5 +36,53 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "941BB78B-77C6-48AE-934B-39599340FB8D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "topoimgpruner/FileControl/TopoFileSelector.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "handleProgress(information:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "941BB78B-77C6-48AE-934B-39599340FB8D - 8b6294346ee42363"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "topoimgpruner.TopoFileSelector.handleProgress(information: Swift.Optional&lt;Any&gt;) -&gt; ()"
+                  moduleName = "topoimgpruner"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexei/Code/topoimgpruner/topoimgpruner/FileControl/TopoFileSelector.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "56"
+                  endingLineNumber = "56"
+                  offsetFromSymbolStart = "52">
+               </Location>
+               <Location
+                  uuid = "941BB78B-77C6-48AE-934B-39599340FB8D - 8b6294346ee42363"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "topoimgpruner.TopoFileSelector.handleProgress(information: Swift.Optional&lt;Any&gt;) -&gt; ()"
+                  moduleName = "topoimgpruner"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexei/Code/topoimgpruner/topoimgpruner/FileControl/TopoFileSelector.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "56"
+                  endingLineNumber = "56"
+                  offsetFromSymbolStart = "220">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

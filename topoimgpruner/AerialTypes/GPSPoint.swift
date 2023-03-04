@@ -7,6 +7,9 @@
 
 import Foundation
 
+/**
+ * Defines a specific point in GPS 3D space
+ */
 struct GPSPoint {
     var val:Double = 0,
         ref:CompassPoint = CompassPoint.undefined

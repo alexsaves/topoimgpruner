@@ -7,6 +7,9 @@
 
 import Foundation
 
+/**
+ * Holds basic drone GPS information
+ */
 struct GPSInfo {
     var lat:GPSPoint = GPSPoint(),
         long:GPSPoint = GPSPoint(),

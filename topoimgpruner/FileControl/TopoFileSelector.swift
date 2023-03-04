@@ -43,6 +43,9 @@ struct TopoFileSelector: View {
     // Holds the error handler
     private let _errorHandler: (String) -> Void
     
+    // Handles the parse ready handler
+    private let _parseReadyHandler: (AerialImageSet) -> Void
+    
     /**
      * Handle error emitted
      */
@@ -52,6 +55,9 @@ struct TopoFileSelector: View {
         }
     }
     
+    /**
+     * Received a progress update
+     */
     private func handleProgress(information:Any?) {
         if let info = information as? String {
             parseProgress = info
@@ -59,10 +65,23 @@ struct TopoFileSelector: View {
     }
     
     /**
+     * Finished parsing the set of images
+     */
+    private func handleFinishParse(information:Any?) {
+        isParsing = false
+        if let imgSet = information as? AerialImageSet {
+            _parseReadyHandler(imgSet)
+        } else {
+            _errorHandler(NSLocalizedString("emptyImageSet", comment: "Message for empty image set"))
+        }
+    }
+    
+    /**
      * Set up a new instance with an error handler
      */
-    init(errorHandler: @escaping (String) -> Void) {
+    init(errorHandler: @escaping (String) -> Void, imgSetReadyHandler: @escaping (AerialImageSet) -> Void) {
         _errorHandler = errorHandler
+        _parseReadyHandler = imgSetReadyHandler
     }
     
     /*
@@ -79,9 +98,9 @@ struct TopoFileSelector: View {
                 }
             }
             if isParsing {
-                Text(parseProgress)
+                Text(parseProgress).frame(maxWidth: .infinity, alignment: .leading)
             } else {
-                Text(folderName.count > 0 ? folderName : noSourceStr)
+                Text(folderName.count > 0 ? folderName : noSourceStr).frame(maxWidth: .infinity, alignment: .leading)
             }
             HStack {
                 Button(NSLocalizedString("parseButton", comment: "Button for parsing a folder")) {
@@ -90,8 +109,8 @@ struct TopoFileSelector: View {
                         let parser = DirParser(root: folderName)
                         parser.events.subscribeTo(eventName: "error", action:emitError)
                         parser.events.subscribeTo(eventName: "progress", action:handleProgress)
+                        parser.events.subscribeTo(eventName: "parseDone", action:handleFinishParse)
                         parser.parse()
-                        isParsing = false
                     }
                 }.disabled(!parseReady)
                 Button(NSLocalizedString("exportButton", comment: "Button for exporting a project")) {}.disabled(true)
@@ -102,7 +121,8 @@ struct TopoFileSelector: View {
 
 struct TopoFileSelector_Previews: PreviewProvider {
     static func errHandler(info:String) {}
+    static func imgHandler(iset:AerialImageSet) {}
     static var previews: some View {
-        TopoFileSelector(errorHandler: errHandler)
+        TopoFileSelector(errorHandler: errHandler, imgSetReadyHandler: imgHandler)
     }
 }

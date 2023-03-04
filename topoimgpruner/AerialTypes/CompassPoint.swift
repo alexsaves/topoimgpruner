@@ -7,6 +7,9 @@
 
 import Foundation
 
+/**
+ * Defines a compass point
+ */
 enum CompassPoint {
     case undefined
     case north

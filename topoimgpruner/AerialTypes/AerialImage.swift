@@ -67,8 +67,8 @@ class AerialImage {
     }
     
     // Constructor
-    init(fileUrl: String, imageWidth: Int32, imageHeight: Int32, gpsInfo:NSDictionary, exifData:NSDictionary, thumbImg: CIImage) {
-        url = URL(fileURLWithPath: fileUrl)
+    init(fileUrl: URL, imageWidth: Int32, imageHeight: Int32, gpsInfo:NSDictionary, exifData:NSDictionary, thumbImg: CIImage) {
+        url = fileUrl
         width = imageWidth
         height = imageHeight
         //gps = gpsInfo

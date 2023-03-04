@@ -13,8 +13,17 @@ class DirParser {
     // Holds a pubsub mechanism
     let events = EventHandler();
     
+    // Keeps track of which file we've parsed
+    private var _parseIndex:Int = 0
+    
     // The root of the parser
     public var rootFolder: String = ""
+    
+    // Holds the final output set of images
+    private var _finalImageSet: [AerialImage] = []
+    
+    // Holds the files we need to check
+    private var _filesToCheck: [URL] = []
     
     /**
      * Set up a new instance of the parser
@@ -26,8 +35,8 @@ class DirParser {
     /**
      * Get the list of possible files first
      */
-    private func crawlForFiles() -> [String] {
-        var _filesToCheck: [String] = []
+    private func crawlForFiles() -> [URL] {
+        var _filesToCheck: [URL] = []
         let fm = FileManager.default
         do {
             let url = URL(fileURLWithPath: rootFolder)
@@ -35,8 +44,8 @@ class DirParser {
                 for case let fileURL as URL in enumerator {
                     let fileAttributes = try fileURL.resourceValues(forKeys:[.isRegularFileKey])
                     if fileAttributes.isRegularFile! {
-                        if !_filesToCheck.contains(fileURL.path) {
-                            _filesToCheck.append(fileURL.path)
+                        if fileURL.pathExtension.uppercased() == "JPG" {
+                            _filesToCheck.append(fileURL)
                         }
                     }
                 }
@@ -112,51 +121,54 @@ class DirParser {
     /**
      * Produce a finished list of jpegs
      */
-    private func filterValidAerialJPEGS(filesToCheck: [String]) -> AerialImageSet {
-        var _finalImageSet: [AerialImage] = []
-        let countOfImgs = filesToCheck.count;
-        var progressCounter = 0;
-        let parseMsg = NSLocalizedString("parseProgress", comment: "Default text for choosing a source")
-        for imgSrcUrl in filesToCheck {
-            progressCounter += 1
-            let url = URL(fileURLWithPath: imgSrcUrl)
-            if (url.pathExtension.uppercased() == "JPG") {
-                events.trigger(eventName: "progress", information: "\(parseMsg) \(progressCounter)/\(countOfImgs) '\(imgSrcUrl)'")
-                if let ciImage = CIImage(contentsOf: url) {
-                    let props:[String: Any] = ciImage.properties
-                    let imgW:Int32 = extractInt32FromAny(val: props["PixelWidth"], defaultVal: 0),
-                        imgH:Int32 = extractInt32FromAny(val: props["PixelHeight"], defaultVal: 0),
-                        GPSInfo:NSDictionary = extractDictFromAny(val: props["{GPS}"]),
-                        EXIF:NSDictionary = extractDictFromAny(val: props["{Exif}"])
-                    
-                    let aImg = AerialImage(fileUrl: imgSrcUrl, imageWidth: imgW, imageHeight: imgH, gpsInfo: GPSInfo, exifData: EXIF, thumbImg: getThumbnail(sourceImage: ciImage))
-                    
-                    _finalImageSet.append(aImg)
-                }
+    @objc func filterNextValidAerialJPEG() {
+        let imgSrcUrl = _filesToCheck[_parseIndex]
+        if let ciImage = CIImage(contentsOf: imgSrcUrl) {
+            let props:[String: Any] = ciImage.properties,
+                imgW:Int32 = extractInt32FromAny(val: props["PixelWidth"], defaultVal: 0),
+                imgH:Int32 = extractInt32FromAny(val: props["PixelHeight"], defaultVal: 0),
+                GPSInfo:NSDictionary = extractDictFromAny(val: props["{GPS}"]),
+                EXIF:NSDictionary = extractDictFromAny(val: props["{Exif}"])
+            
+            let aImg = AerialImage(fileUrl: imgSrcUrl, imageWidth: imgW, imageHeight: imgH, gpsInfo: GPSInfo, exifData: EXIF, thumbImg: getThumbnail(sourceImage: ciImage))
+            
+            _finalImageSet.append(aImg)
+        }
+        
+        _setAdvanceToNextFile()
+    }
+    
+    private func _setAdvanceToNextFile() {
+        _parseIndex += 1
+        if (_parseIndex < _filesToCheck.count) {
+            let parseMsg = NSLocalizedString("parseProgress", comment: "Default text for choosing a source")
+            let url = _filesToCheck[_parseIndex]
+            events.trigger(eventName: "progress", information: "\(parseMsg) (\(_parseIndex+1)/\(_filesToCheck.count)) '\(url.lastPathComponent)'")
+            Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(filterNextValidAerialJPEG), userInfo: nil, repeats: false)
+        } else {
+            // Done!
+            let _finalAerialSet: AerialImageSet = AerialImageSet(images: _finalImageSet)
+            if _filesToCheck.count == 0 {
+                // Error on scan
+                events.trigger(eventName: "error", information: "Found no eligible aerial images from scan")
+            } else {
+                events.trigger(eventName: "parseDone", information: _finalAerialSet)
             }
         }
-        let _finalSet = AerialImageSet(images: _finalImageSet)
-        return _finalSet
     }
     
     /**
     * Start a parse operation
      */
-    func parse() -> AerialImageSet? {
-        let _filesToCheck: [String] = crawlForFiles()
+    func parse() {
+        _filesToCheck = crawlForFiles()
         if _filesToCheck.count == 0 {
             // Error on scan
             events.trigger(eventName: "error", information: "Found no eligible files to scan")
-            return nil
         } else {
-            let _finalImageSet: AerialImageSet = filterValidAerialJPEGS(filesToCheck: _filesToCheck)
-            if _filesToCheck.count == 0 {
-                // Error on scan
-                events.trigger(eventName: "error", information: "Found no eligible aerial images from scan")
-                return nil
-            } else {
-                return _finalImageSet
-            }
+            // Reset the parse index
+            _parseIndex = -1
+            _setAdvanceToNextFile()
         }
     }
 }

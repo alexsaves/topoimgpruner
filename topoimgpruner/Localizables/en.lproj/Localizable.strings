@@ -14,3 +14,4 @@
 "exportButton" = "Export to…";
 "parseProgressInit" = "Initializing…";
 "parseProgress" = "Parsing:";
+"emptyImageSet" = "Found no parseable images";

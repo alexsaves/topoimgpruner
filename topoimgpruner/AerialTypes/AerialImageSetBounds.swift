@@ -7,6 +7,9 @@
 
 import Foundation
 
+/**
+ * Defined minimum and maximum boundaries for a set of images
+ */
 struct AerialImageSetBounds {
     var minLatitude: GPSPoint = GPSPoint(),
         maxLatitude: GPSPoint = GPSPoint(),

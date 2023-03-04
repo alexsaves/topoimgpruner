@@ -25,10 +25,16 @@ struct ContentView: View {
         print(information)
     }
     
+    /**
+     * Receives the image set
+     */
+    private func imgSetReadyHandler(imgSet:AerialImageSet) {
+        print("GOT IMGS")
+    }
     
     var body: some View {
         VStack() {
-            TopoFileSelector(errorHandler: errorHandler).frame(
+            TopoFileSelector(errorHandler: errorHandler, imgSetReadyHandler: imgSetReadyHandler).frame(
                 minWidth: 0,
                 maxWidth: .infinity,
                 alignment: .leading

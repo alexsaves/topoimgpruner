@@ -95,6 +95,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AA15B3C429B2CF21009035B1 /* AerialTypes */ = {
+			isa = PBXGroup;
+			children = (
+				AA50FCE229AF98160086604B /* AerialImage.swift */,
+				AA15B3BA29B24DFA009035B1 /* AerialImageSet.swift */,
+				AA15B3BC29B250DB009035B1 /* GPSInfo.swift */,
+				AA15B3BE29B25954009035B1 /* CompassPoint.swift */,
+				AA15B3C029B25979009035B1 /* GPSPoint.swift */,
+				AA15B3C229B25A6F009035B1 /* AerialImageSetBounds.swift */,
+			);
+			path = AerialTypes;
+			sourceTree = "<group>";
+		};
 		AA50FCD929AE3EA80086604B /* Pruner */ = {
 			isa = PBXGroup;
 			children = (
@@ -116,12 +129,6 @@
 			isa = PBXGroup;
 			children = (
 				AA50FCDE29AE427B0086604B /* DirParser.swift */,
-				AA50FCE229AF98160086604B /* AerialImage.swift */,
-				AA15B3BA29B24DFA009035B1 /* AerialImageSet.swift */,
-				AA15B3BC29B250DB009035B1 /* GPSInfo.swift */,
-				AA15B3BE29B25954009035B1 /* CompassPoint.swift */,
-				AA15B3C029B25979009035B1 /* GPSPoint.swift */,
-				AA15B3C229B25A6F009035B1 /* AerialImageSetBounds.swift */,
 			);
 			path = Parser;
 			sourceTree = "<group>";
@@ -157,6 +164,7 @@
 		AAEE394429AC27BC002E6CC5 /* topoimgpruner */ = {
 			isa = PBXGroup;
 			children = (
+				AA15B3C429B2CF21009035B1 /* AerialTypes */,
 				AA50FCDC29AE42030086604B /* FileControl */,
 				AA50FCD929AE3EA80086604B /* Pruner */,
 				AA6AF1C029ADBB6600FDC128 /* Localizables */,
