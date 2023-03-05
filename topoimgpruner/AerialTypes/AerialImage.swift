@@ -11,24 +11,24 @@ import CoreImage
 /**
  * Describes a source aerial image file
  */
-class AerialImage {
+class AerialImage: ObservableObject {
     // Image Pixel Width
-    var width:Int32 = 0
+    @Published var width:Int32 = 0
     
     // Image Pixel Height
-    var height:Int32 = 0
+    @Published var height:Int32 = 0
     
     // Source URL
-    var url:URL
+    @Published var url:URL
 
     // EXIF Data
-    var exif:NSDictionary
+    @Published var exif:NSDictionary
     
     // Thumbnail
-    var thumb:CIImage
+    @Published var thumb:CIImage
     
     // The GPS location information
-    var gps:GPSInfo = GPSInfo()
+    @Published var gps:GPSInfo = GPSInfo()
     
     /**
      * Convert an any value to a double
@@ -100,6 +100,5 @@ class AerialImage {
         default:
             gps.long.ref = CompassPoint.west
         }
-        print("LOCATION: \(gps.long.val),\(gps.lat.val)")
     }
 }

@@ -18,20 +18,24 @@ struct ContentView: View {
     // The Google Maps API Key
     @State var GMAPS_API_KEY: String = ""
     
+    // The set of images
+    @StateObject var imgSet:AerialImageSet = AerialImageSet()
+    
+    // Holds a pubsub mechanism
+    let events:EventHandler = EventHandler()
+    
     /**
      * Master error handler
      */
     private func errorHandler(information:String) {
         hasError = true
         errorMessage = information
-        print("Master error handler")
-        print(information)
     }
     
     /**
      * Receives the image set
      */
-    private func imgSetReadyHandler(imgSet:AerialImageSet) {
+    private func imgSetReadyHandler(imgSetObj:AerialImageSet) {
         let file = "mapsapi.txt"
 
         if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
@@ -48,9 +52,12 @@ struct ContentView: View {
                 hasError = true
                 errorMessage = NSLocalizedString("missingMapsAPIKey", comment: "The window title") + "\(fileURL.absoluteString)"
             } else {
-                let mapImgGrabber:MapsImageFileGrabber = MapsImageFileGrabber(apiKey: GMAPS_API_KEY)
+                imgSet.images = imgSetObj.images
+                imgSet.bounds = imgSetObj.bounds
+                //events.trigger(eventName: "imgsReceived", information: imgSet)
+                /*let mapImgGrabber:MapsImageFileGrabber = MapsImageFileGrabber(apiKey: GMAPS_API_KEY)
                 mapImgGrabber.grabMapsImage(forSet: imgSet)
-                print("GOT IMGS \(GMAPS_API_KEY)")
+                print("GOT IMGS \(GMAPS_API_KEY)")*/
             }
         }        
     }
@@ -59,12 +66,17 @@ struct ContentView: View {
      * Constructor
      */
     init() {
-        
     }
     
+    /**
+     * Render the UI
+     */
     var body: some View {
         VStack() {
-            TopoFileSelector(errorHandler: errorHandler, imgSetReadyHandler: imgSetReadyHandler).frame(
+            TopoFileSelector(
+                errorHandler: errorHandler,
+                imgSetReadyHandler: imgSetReadyHandler
+            ).frame(
                 minWidth: 0,
                 maxWidth: .infinity,
                 alignment: .leading
@@ -72,7 +84,12 @@ struct ContentView: View {
             if hasError {
                 Text("Err: \(errorMessage)").foregroundColor(Color.red).frame(maxWidth: .infinity)
             } else {
-                PrunerUI().frame(maxWidth: .infinity)
+                PrunerUI(
+                    events:events,
+                    imgSetObj: imgSet
+                ).frame(
+                    maxWidth: .infinity
+                )
             }
         }
         .padding()

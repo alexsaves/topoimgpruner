@@ -7,13 +7,13 @@
 
 import Foundation
 
-class AerialImageSet {
+class AerialImageSet: ObservableObject {
     
     // The set of images
-    var images: [AerialImage]
+    @Published var images: [AerialImage] = []
     
     // The boundaries
-    var bounds: AerialImageSetBounds
+    @Published var bounds: AerialImageSetBounds = AerialImageSetBounds()
     
     /**
      * Determine boundaries
@@ -103,4 +103,6 @@ class AerialImageSet {
         self.bounds = AerialImageSetBounds()
         calcBounds()
     }
+    
+    init() {}
 }
