@@ -9,9 +9,7 @@
 /* Begin PBXBuildFile section */
 		AA15B3BB29B24DFA009035B1 /* AerialImageSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA15B3BA29B24DFA009035B1 /* AerialImageSet.swift */; };
 		AA15B3BD29B250DB009035B1 /* GPSInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA15B3BC29B250DB009035B1 /* GPSInfo.swift */; };
-		AA15B3BF29B25954009035B1 /* CompassPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA15B3BE29B25954009035B1 /* CompassPoint.swift */; };
 		AA15B3C329B25A6F009035B1 /* AerialImageSetBounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA15B3C229B25A6F009035B1 /* AerialImageSetBounds.swift */; };
-		AA15B3CD29B393B3009035B1 /* MapsImageFileGrabber.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA15B3CC29B393B3009035B1 /* MapsImageFileGrabber.swift */; };
 		AA15B3CF29B50B60009035B1 /* ImgPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA15B3CE29B50B60009035B1 /* ImgPicker.swift */; };
 		AA50FCDB29AE3ECD0086604B /* PrunerUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA50FCDA29AE3ECD0086604B /* PrunerUI.swift */; };
 		AA50FCDF29AE427B0086604B /* DirParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA50FCDE29AE427B0086604B /* DirParser.swift */; };
@@ -48,9 +46,7 @@
 /* Begin PBXFileReference section */
 		AA15B3BA29B24DFA009035B1 /* AerialImageSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AerialImageSet.swift; sourceTree = "<group>"; };
 		AA15B3BC29B250DB009035B1 /* GPSInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSInfo.swift; sourceTree = "<group>"; };
-		AA15B3BE29B25954009035B1 /* CompassPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassPoint.swift; sourceTree = "<group>"; };
 		AA15B3C229B25A6F009035B1 /* AerialImageSetBounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AerialImageSetBounds.swift; sourceTree = "<group>"; };
-		AA15B3CC29B393B3009035B1 /* MapsImageFileGrabber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsImageFileGrabber.swift; sourceTree = "<group>"; };
 		AA15B3CE29B50B60009035B1 /* ImgPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgPicker.swift; sourceTree = "<group>"; };
 		AA50FCDA29AE3ECD0086604B /* PrunerUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrunerUI.swift; sourceTree = "<group>"; };
 		AA50FCDE29AE427B0086604B /* DirParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirParser.swift; sourceTree = "<group>"; };
@@ -103,7 +99,6 @@
 				AA50FCE229AF98160086604B /* AerialImage.swift */,
 				AA15B3BA29B24DFA009035B1 /* AerialImageSet.swift */,
 				AA15B3BC29B250DB009035B1 /* GPSInfo.swift */,
-				AA15B3BE29B25954009035B1 /* CompassPoint.swift */,
 				AA15B3C229B25A6F009035B1 /* AerialImageSetBounds.swift */,
 			);
 			path = AerialTypes;
@@ -113,7 +108,6 @@
 			isa = PBXGroup;
 			children = (
 				AA50FCDA29AE3ECD0086604B /* PrunerUI.swift */,
-				AA15B3CC29B393B3009035B1 /* MapsImageFileGrabber.swift */,
 				AA15B3CE29B50B60009035B1 /* ImgPicker.swift */,
 			);
 			path = Pruner;
@@ -347,9 +341,7 @@
 				AA50FCE329AF98160086604B /* AerialImage.swift in Sources */,
 				AA15B3BD29B250DB009035B1 /* GPSInfo.swift in Sources */,
 				AA6AF1BD29AC335400FDC128 /* TopoFileSelector.swift in Sources */,
-				AA15B3CD29B393B3009035B1 /* MapsImageFileGrabber.swift in Sources */,
 				AA50FCE129AF10070086604B /* EventHandler.swift in Sources */,
-				AA15B3BF29B25954009035B1 /* CompassPoint.swift in Sources */,
 				AAEE394829AC27BC002E6CC5 /* ContentView.swift in Sources */,
 				AAEE394629AC27BC002E6CC5 /* topoimgprunerApp.swift in Sources */,
 				AA15B3C329B25A6F009035B1 /* AerialImageSetBounds.swift in Sources */,

@@ -76,25 +76,17 @@ class AerialImage: ObservableObject, Identifiable {
         if let unwrapLongRef = longrefTmp {
             longref = unwrapLongRef
         }
-        var latRefCp:CompassPoint = CompassPoint.undefined
-        var longRefCp:CompassPoint = CompassPoint.undefined
         switch latref {
-        case "N":
-            latRefCp = CompassPoint.north
-        case "S":
-            latRefCp = CompassPoint.south
-            latitude *= -1
-        default:
-            latRefCp = CompassPoint.north
+            case "S":
+                latitude *= -1
+            default:
+                break
         }
         switch longref {
         case "W":
-            longRefCp = CompassPoint.west
             longitude *= -1
-        case "E":
-            longRefCp = CompassPoint.east
         default:
-            longRefCp = CompassPoint.west
+            break
         }
         
         coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)

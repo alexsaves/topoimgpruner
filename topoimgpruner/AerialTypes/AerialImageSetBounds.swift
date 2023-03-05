@@ -14,9 +14,11 @@ import MapKit
 struct AerialImageSetBounds {
     var min: CLLocationCoordinate2D
     var max: CLLocationCoordinate2D
+    var mid: CLLocationCoordinate2D
     
-    init(forMin: CLLocationCoordinate2D, forMax: CLLocationCoordinate2D) {
+    init(forMin: CLLocationCoordinate2D, forMax: CLLocationCoordinate2D, forMid: CLLocationCoordinate2D) {
         min = forMin
         max = forMax
+        mid = forMid
     }
 }
