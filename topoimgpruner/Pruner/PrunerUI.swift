@@ -33,12 +33,41 @@ struct PrunerUI: View {
     
     @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
 
+    struct Place: Identifiable {
+      let id = UUID()
+      var name: String
+      var coordinate: CLLocationCoordinate2D
+    }
+    
+    var empireStateBuilding =
+      Place(name: "Empire State Building", coordinate: CLLocationCoordinate2D(latitude: 40.748433, longitude: -73.985656))
+      
+    struct PlaceAnnotationView: View {
+      var body: some View {
+        VStack(spacing: 0) {
+          Image(systemName: "mappin.circle.fill")
+            .font(.title)
+            .foregroundColor(.red)
+          
+          Image(systemName: "arrowtriangle.down.fill")
+            .font(.caption)
+            .foregroundColor(.red)
+            .offset(x: 0, y: -5)
+        }
+      }
+    }
     
     // Render the view
     var body: some View {
         if (imgSet.images.count > 0) {
             HSplitView() {
-                Map(coordinateRegion: $region).layoutPriority(1)
+                Map(
+                    coordinateRegion: $region,
+                    annotationItems: [empireStateBuilding]) { place in
+                        MapAnnotation(coordinate: place.coordinate) {
+                                PlaceAnnotationView()
+                              }
+                      }.layoutPriority(1)
                 ScrollView(.vertical, showsIndicators: true) {
                     ImgPicker(forSet: imgSet)
                 }

@@ -8,6 +8,7 @@
 import Foundation
 import CoreImage
 import AppKit
+import MapKit
 
 /**
  * Describes a source aerial image file
@@ -36,6 +37,12 @@ class AerialImage: ObservableObject, Identifiable {
     
     // The GPS location information
     @Published var gps:GPSInfo = GPSInfo()
+    
+    // The name
+    @Published var name:String
+    
+    // The MapKit friendly coordinate
+    @Published var coordinate:CLLocationCoordinate2D
     
     /**
      * Convert an any value to a double
@@ -84,10 +91,18 @@ class AerialImage: ObservableObject, Identifiable {
         let nsImage: NSImage = NSImage(size: rep.size)
         nsImage.addRepresentation(rep)
         thumb = nsImage
+        name = fileUrl.lastPathComponent
+        
+        coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(0), longitude: CLLocationDegrees(0))
+        
+        let latitude:Double = extractDoubleFromAny(val: gpsInfo["Latitude"], defaultVal: 0)
+        let longitude:Double = extractDoubleFromAny(val: gpsInfo["Longitude"], defaultVal: 0)
+        coordinate.latitude = latitude
+        coordinate.longitude = longitude
         
         // Do the GPS
-        gps.lat.val = extractDoubleFromAny(val: gpsInfo["Latitude"], defaultVal: 0)
-        gps.long.val = extractDoubleFromAny(val: gpsInfo["Longitude"], defaultVal: 0)
+        gps.lat.val = latitude
+        gps.long.val = longitude
         gps.altitude.val = extractDoubleFromAny(val: gpsInfo["Altitude"], defaultVal: 0)
         gps.altitude.ref = CompassPoint.feet
         let latref = extractStrFromAny(val: gpsInfo["LatitudeRef"], defaultVal: "N")

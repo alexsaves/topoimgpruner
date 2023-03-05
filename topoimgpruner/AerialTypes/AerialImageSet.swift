@@ -77,7 +77,7 @@ class AerialImageSet: ObservableObject {
         // Now calculate the midpoint of the boundary
         if bounds.minLatitude.ref == bounds.maxLatitude.ref {
             // they are in the same hemisphere, this should be easy
-            bounds.midLatitude.val = (bounds.minLatitude.val + bounds.maxLatitude.val) / 2
+            
             bounds.midLatitude.ref = bounds.minLatitude.ref
         } else {
             // TODO: figure out cross-hemisphere midpoints
@@ -85,11 +85,13 @@ class AerialImageSet: ObservableObject {
         
         if bounds.minLongitude.ref == bounds.maxLongitude.ref {
             // they are in the same hemisphere, this should be easy
-            bounds.midLongitude.val = (bounds.minLongitude.val + bounds.maxLongitude.val) / 2
             bounds.midLongitude.ref = bounds.minLatitude.ref
         } else {
             // TODO: figure out cross-hemisphere midpoints
         }
+        
+        bounds.midLatitude.val = (bounds.minLatitude.val + bounds.maxLatitude.val) / 2
+        bounds.midLongitude.val = (bounds.minLongitude.val + bounds.maxLongitude.val) / 2
         
         // Finally, Calculate the zoom level
         bounds.zoom = 15;
