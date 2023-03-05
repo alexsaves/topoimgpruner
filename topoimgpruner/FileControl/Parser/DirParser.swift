@@ -101,7 +101,7 @@ class DirParser {
         let resizeFilter = CIFilter(name:"CILanczosScaleTransform")!
 
         // Desired output size
-        let targetSize = NSSize(width:500, height:500)
+        let targetSize = NSSize(width:300, height:300)
 
         // Compute scale and corrective aspect ratio
         let scale = targetSize.height / (sourceImage.extent.height)

@@ -7,11 +7,18 @@
 
 import Foundation
 import CoreImage
+import AppKit
 
 /**
  * Describes a source aerial image file
  */
-class AerialImage: ObservableObject {
+class AerialImage: ObservableObject, Identifiable {
+    
+    // Holds the identifiable ID
+    var id: String {
+        return url.absoluteString
+    }
+    
     // Image Pixel Width
     @Published var width:Int32 = 0
     
@@ -25,7 +32,7 @@ class AerialImage: ObservableObject {
     @Published var exif:NSDictionary
     
     // Thumbnail
-    @Published var thumb:CIImage
+    @Published var thumb:NSImage
     
     // The GPS location information
     @Published var gps:GPSInfo = GPSInfo()
@@ -73,7 +80,10 @@ class AerialImage: ObservableObject {
         height = imageHeight
         //gps = gpsInfo
         exif = exifData
-        thumb = thumbImg
+        let rep: NSCIImageRep = NSCIImageRep(ciImage: thumbImg)
+        let nsImage: NSImage = NSImage(size: rep.size)
+        nsImage.addRepresentation(rep)
+        thumb = nsImage
         
         // Do the GPS
         gps.lat.val = extractDoubleFromAny(val: gpsInfo["Latitude"], defaultVal: 0)

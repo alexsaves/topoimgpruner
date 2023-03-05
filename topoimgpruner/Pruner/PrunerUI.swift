@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct PrunerUI: View {
     
@@ -30,10 +31,20 @@ struct PrunerUI: View {
         }
     }
     
+    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
+
+    
     // Render the view
     var body: some View {
         if (imgSet.images.count > 0) {
-            Text("Got images!")
+            HSplitView() {
+                Map(coordinateRegion: $region).layoutPriority(1)
+                ScrollView(.vertical, showsIndicators: true) {
+                    ImgPicker(forSet: imgSet)
+                }
+                .padding([.leading], 10)
+                .frame(minWidth: 300, maxWidth: .infinity)
+             }
         } else {
             VStack {
                 HStack {
