@@ -36,7 +36,7 @@ class AerialImage: ObservableObject, Identifiable {
     @Published var thumb:NSImage
     
     // The GPS location information
-    @Published var gps:GPSInfo = GPSInfo()
+    @Published var altitude: Double
     
     // The name
     @Published var name:String
@@ -44,48 +44,11 @@ class AerialImage: ObservableObject, Identifiable {
     // The MapKit friendly coordinate
     @Published var coordinate:CLLocationCoordinate2D
     
-    /**
-     * Convert an any value to a double
-     */
-    private func extractDoubleFromAny(val: Any?, defaultVal: Double) -> Double {
-        var outVal = defaultVal
-        let i = val as? Double
-        if let unwrap = i {
-            outVal = unwrap
-        }
-        return outVal
-    }
-    
-    /**
-     * Convert an any value to an int
-     */
-    private func extractInt32FromAny(val: Any?, defaultVal: Int32) -> Int32 {
-        var outVal = defaultVal
-        let i = val as? Int32
-        if let unwrap = i {
-            outVal = unwrap
-        }
-        return outVal
-    }
-    
-    /**
-     * Convert an any value to a String
-     */
-    private func extractStrFromAny(val: Any?, defaultVal: String) -> String {
-        var outVal = defaultVal
-        let i = val as? String
-        if let unwrap = i {
-            outVal = unwrap
-        }
-        return outVal
-    }
-    
     // Constructor
     init(fileUrl: URL, imageWidth: Int32, imageHeight: Int32, gpsInfo:NSDictionary, exifData:NSDictionary, thumbImg: CIImage) {
         url = fileUrl
         width = imageWidth
         height = imageHeight
-        //gps = gpsInfo
         exif = exifData
         let rep: NSCIImageRep = NSCIImageRep(ciImage: thumbImg)
         let nsImage: NSImage = NSImage(size: rep.size)
@@ -93,37 +56,56 @@ class AerialImage: ObservableObject, Identifiable {
         thumb = nsImage
         name = fileUrl.lastPathComponent
         
-        coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(0), longitude: CLLocationDegrees(0))
-        
-        let latitude:Double = extractDoubleFromAny(val: gpsInfo["Latitude"], defaultVal: 0)
-        let longitude:Double = extractDoubleFromAny(val: gpsInfo["Longitude"], defaultVal: 0)
-        coordinate.latitude = latitude
-        coordinate.longitude = longitude
-        
-        // Do the GPS
-        gps.lat.val = latitude
-        gps.long.val = longitude
-        gps.altitude.val = extractDoubleFromAny(val: gpsInfo["Altitude"], defaultVal: 0)
-        gps.altitude.ref = CompassPoint.feet
-        let latref = extractStrFromAny(val: gpsInfo["LatitudeRef"], defaultVal: "N")
-        let longref = extractStrFromAny(val: gpsInfo["LongitudeRef"], defaultVal: "W")
+        var latitude:Double = 0
+        let latTmp = gpsInfo["Latitude"] as? Double
+        if let unwrapLat = latTmp {
+            latitude = unwrapLat
+        }
+        var longitude:Double = 0
+        let longTmp = gpsInfo["Longitude"] as? Double
+        if let unwrapLong = longTmp {
+            longitude = unwrapLong
+        }
+        var latref:String = "N"
+        let latrefTmp = gpsInfo["LatitudeRef"] as? String
+        if let unwrapLatRef = latrefTmp {
+            latref = unwrapLatRef
+        }
+        var longref:String = "W"
+        let longrefTmp = gpsInfo["LongitudeRef"] as? String
+        if let unwrapLongRef = longrefTmp {
+            longref = unwrapLongRef
+        }
+        var latRefCp:CompassPoint = CompassPoint.undefined
+        var longRefCp:CompassPoint = CompassPoint.undefined
         switch latref {
         case "N":
-            gps.lat.ref = CompassPoint.north
+            latRefCp = CompassPoint.north
         case "S":
-            gps.lat.ref = CompassPoint.south
-            gps.lat.val *= -1
+            latRefCp = CompassPoint.south
+            latitude *= -1
         default:
-            gps.lat.ref = CompassPoint.north
+            latRefCp = CompassPoint.north
         }
         switch longref {
         case "W":
-            gps.long.ref = CompassPoint.west
-            gps.long.val *= -1
+            longRefCp = CompassPoint.west
+            longitude *= -1
         case "E":
-            gps.long.ref = CompassPoint.east
+            longRefCp = CompassPoint.east
         default:
-            gps.long.ref = CompassPoint.west
+            longRefCp = CompassPoint.west
         }
+        
+        coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        
+        // Do altitude
+        var _alt:Double = 0
+        let longAlt = gpsInfo["Altitude"] as? Double
+        if let unwrapAlt = longAlt {
+            _alt = unwrapAlt
+        }
+        altitude = _alt
+        
     }
 }

@@ -13,47 +13,45 @@ class AerialImageSet: ObservableObject {
     @Published var images: [AerialImage] = []
     
     // The boundaries
-    @Published var bounds: AerialImageSetBounds = AerialImageSetBounds()
+    @Published var bounds: AerialImageSetBounds
     
     /**
      * Determine boundaries
      */
-    private func calcBounds() {
+    private func calcBounds() -> AerialImageSetBounds {
         // Calculate the outer boundaries of the image set
         for img in images {
-            //print(img.url.absoluteString)
-            let gps:GPSInfo = img.gps
-            if bounds.minLatitude.ref == CompassPoint.undefined {
-                bounds.minLatitude.ref = gps.lat.ref
-                bounds.minLatitude.val = gps.lat.val
+            if bounds.min.latitude.ref == CompassPoint.undefined {
+                bounds.min.latitude.ref = gps.lat.ref
+                bounds.min.latitude.val = gps.lat.val
             }
             if bounds.maxLatitude.ref == CompassPoint.undefined {
                 bounds.maxLatitude.ref = gps.lat.ref
                 bounds.maxLatitude.val = gps.lat.val
             }
-            if bounds.minLongitude.ref == CompassPoint.undefined {
-                bounds.minLongitude.ref = gps.long.ref
-                bounds.minLongitude.val = gps.long.val
+            if bounds.min.longitude.ref == CompassPoint.undefined {
+                bounds.min.longitude.ref = gps.long.ref
+                bounds.min.longitude.val = gps.long.val
             }
             if bounds.maxLongitude.ref == CompassPoint.undefined {
                 bounds.maxLongitude.ref = gps.long.ref
                 bounds.maxLongitude.val = gps.long.val
             }
-            if gps.lat.ref == CompassPoint.north && bounds.minLatitude.ref == CompassPoint.south {
+            if gps.lat.ref == CompassPoint.north && bounds.min.latitude.ref == CompassPoint.south {
                 // The current lat was in southern hemisphere and the new one is in northern
-                bounds.minLatitude.ref = gps.lat.ref
-                bounds.minLatitude.val = gps.lat.val
+                bounds.min.latitude.ref = gps.lat.ref
+                bounds.min.latitude.val = gps.lat.val
             }
-            if gps.lat.ref == bounds.minLatitude.ref && gps.lat.val > bounds.minLatitude.val {
-                bounds.minLatitude.val = gps.lat.val
+            if gps.lat.ref == bounds.min.latitude.ref && gps.lat.val > bounds.min.latitude.val {
+                bounds.min.latitude.val = gps.lat.val
             }
-            if gps.long.ref == CompassPoint.west && bounds.minLongitude.ref == CompassPoint.west {
+            if gps.long.ref == CompassPoint.west && bounds.min.longitude.ref == CompassPoint.west {
                 // The current lat was in Eastern hemisphere and the new one is in western
-                bounds.minLongitude.ref = gps.long.ref
-                bounds.minLongitude.val = gps.long.val
+                bounds.min.longitude.ref = gps.long.ref
+                bounds.min.longitude.val = gps.long.val
             }
-            if gps.long.ref == bounds.minLongitude.ref && gps.long.val > bounds.minLongitude.val {
-                bounds.minLongitude.val = gps.long.val
+            if gps.long.ref == bounds.min.longitude.ref && gps.long.val > bounds.min.longitude.val {
+                bounds.min.longitude.val = gps.long.val
             }
             
             if gps.lat.ref == CompassPoint.south && bounds.maxLatitude.ref == CompassPoint.north {
@@ -75,23 +73,23 @@ class AerialImageSet: ObservableObject {
         }
         
         // Now calculate the midpoint of the boundary
-        if bounds.minLatitude.ref == bounds.maxLatitude.ref {
+        if bounds.min.latitude.ref == bounds.maxLatitude.ref {
             // they are in the same hemisphere, this should be easy
             
-            bounds.midLatitude.ref = bounds.minLatitude.ref
+            bounds.midLatitude.ref = bounds.min.latitude.ref
         } else {
             // TODO: figure out cross-hemisphere midpoints
         }
         
-        if bounds.minLongitude.ref == bounds.maxLongitude.ref {
+        if bounds.min.longitude.ref == bounds.maxLongitude.ref {
             // they are in the same hemisphere, this should be easy
-            bounds.midLongitude.ref = bounds.minLatitude.ref
+            bounds.midLongitude.ref = bounds.min.latitude.ref
         } else {
             // TODO: figure out cross-hemisphere midpoints
         }
         
-        bounds.midLatitude.val = (bounds.minLatitude.val + bounds.maxLatitude.val) / 2
-        bounds.midLongitude.val = (bounds.minLongitude.val + bounds.maxLongitude.val) / 2
+        bounds.midLatitude.val = (bounds.min.latitude.val + bounds.maxLatitude.val) / 2
+        bounds.midLongitude.val = (bounds.min.longitude.val + bounds.maxLongitude.val) / 2
         
         // Finally, Calculate the zoom level
         bounds.zoom = 15;

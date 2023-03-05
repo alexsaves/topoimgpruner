@@ -6,16 +6,17 @@
 //
 
 import Foundation
+import MapKit
 
 /**
  * Defined minimum and maximum boundaries for a set of images
  */
 struct AerialImageSetBounds {
-    var minLatitude: GPSPoint = GPSPoint(),
-        maxLatitude: GPSPoint = GPSPoint(),
-        minLongitude: GPSPoint = GPSPoint(),
-        maxLongitude: GPSPoint = GPSPoint(),
-        midLatitude: GPSPoint = GPSPoint(),
-        midLongitude: GPSPoint = GPSPoint(),
-        zoom: Int = 0
+    var min: CLLocationCoordinate2D
+    var max: CLLocationCoordinate2D
+    
+    init(forMin: CLLocationCoordinate2D, forMax: CLLocationCoordinate2D) {
+        min = forMin
+        max = forMax
+    }
 }

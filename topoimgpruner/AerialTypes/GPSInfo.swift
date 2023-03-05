@@ -6,12 +6,13 @@
 //
 
 import Foundation
+import MapKit
 
 /**
  * Holds basic drone GPS information
  */
 struct GPSInfo {
-    var lat:GPSPoint = GPSPoint(),
-        long:GPSPoint = GPSPoint(),
-        altitude: GPSPoint = GPSPoint()
+    var lat:CLLocationCoordinate2D = CLLocationCoordinate2D(),
+        long:CLLocationCoordinate2D = CLLocationCoordinate2D(),
+        altitude: CLLocationCoordinate2D = CLLocationCoordinate2D()
 }
