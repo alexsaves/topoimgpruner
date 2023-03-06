@@ -16,9 +16,7 @@ import MapKit
 class AerialImage: ObservableObject, Identifiable {
     
     // Holds the identifiable ID
-    var id: String {
-        return url.absoluteString
-    }
+    @Published var id: String
     
     // Image Pixel Width
     @Published var width:Int32 = 0
@@ -54,6 +52,7 @@ class AerialImage: ObservableObject, Identifiable {
         name = "/"
         coordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
         altitude = 0
+        id = "/"
     }
     
     // Constructor
@@ -62,6 +61,7 @@ class AerialImage: ObservableObject, Identifiable {
         width = imageWidth
         height = imageHeight
         exif = exifData
+        id = fileUrl.absoluteString
         let rep: NSCIImageRep = NSCIImageRep(ciImage: thumbImg)
         let nsImage: NSImage = NSImage(size: rep.size)
         nsImage.addRepresentation(rep)

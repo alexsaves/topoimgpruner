@@ -19,14 +19,22 @@ struct PrunerUI: View {
     // Do we have the images?
     @State var hasImages:Bool = false
     
-    //@State private var region:MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 40.748433, longitude: -73.985656), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-    //@State private var region:MKCoordinateRegion
-      
+    // Holds the currently selected image
+    @State var selectedImage:AerialImage
+    
+    /**
+     * Master marker select image handler
+     */
+    private func selectImgFromMarker(information:AerialImage) {
+        selectedImage = information
+    }
+    
     /**
      * Constructor
      */
     init(events:EventHandler, imgSetObj: AerialImageSet) {
         self.topEventHandler = events
+        selectedImage = AerialImage()
         imgSet.region = imgSetObj.region
         imgSet.bounds = imgSetObj.bounds
         imgSet.images = imgSetObj.images
@@ -40,9 +48,13 @@ struct PrunerUI: View {
         // Holds a pointer to the image that this is associated with
         let img:AerialImage
         
+        // Holds the Select image handler (called from map markers)
+        private let _selectImgHandler: (AerialImage) -> Void
+        
         // Constructor
-        init(forImg:AerialImage) {
+        init(forImg:AerialImage, selectImage: @escaping (AerialImage) -> Void) {
             img = forImg
+            _selectImgHandler = selectImage
         }
         
         // The view
@@ -57,7 +69,8 @@ struct PrunerUI: View {
                     .foregroundColor(.red)
                     .offset(x: 0, y: -5)
             }.onTapGesture(count: 1, perform: {
-                print("IT WORKS: \(img)")
+                // Select image
+                _selectImgHandler(img)
             })
         }
     }
@@ -70,11 +83,11 @@ struct PrunerUI: View {
                     coordinateRegion: $imgSet.region,
                     annotationItems: imgSet.images) { place in
                         MapAnnotation(coordinate: place.coordinate) {
-                            PlaceAnnotationView(forImg:place)
+                            PlaceAnnotationView(forImg:place, selectImage: selectImgFromMarker)
                         }
                       }.layoutPriority(1)
                 ScrollView(.vertical, showsIndicators: true) {
-                    ImgPicker(forSet: imgSet, selected: AerialImage())
+                    ImgPicker(forSet: imgSet, selected: selectedImage)
                 }
                 .padding([.leading], 10)
                 .frame(minWidth: 300, maxWidth: .infinity)
