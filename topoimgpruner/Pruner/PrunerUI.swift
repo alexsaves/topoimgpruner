@@ -19,11 +19,20 @@ struct PrunerUI: View {
     // Do we have the images?
     @State var hasImages:Bool = false
     
+    //@State private var region:MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 40.748433, longitude: -73.985656), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+    //@State private var region:MKCoordinateRegion
+      
     /**
      * Constructor
      */
     init(events:EventHandler, imgSetObj: AerialImageSet) {
         self.topEventHandler = events
+        //print("Region: \(imgSetObj.region)")
+        //region = imgSetObj.region
+        //region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 40.748433, longitude: -73.985656), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+        imgSet.region = imgSetObj.region
+        print("ABOUT TO RENDER: \(imgSetObj.region)")
+        //imgSet.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 40.748433, longitude: -73.985656), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
         imgSet.bounds = imgSetObj.bounds
         imgSet.images = imgSetObj.images
         if (imgSetObj.images.count > 0) {
@@ -31,8 +40,7 @@ struct PrunerUI: View {
         }
     }
     
-    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
-
+    // Map marker definition
     struct PlaceAnnotationView: View {
       var body: some View {
         VStack(spacing: 0) {
@@ -53,7 +61,7 @@ struct PrunerUI: View {
         if (imgSet.images.count > 0) {
             HSplitView() {
                 Map(
-                    coordinateRegion: $region,
+                    coordinateRegion: $imgSet.region,
                     annotationItems: imgSet.images) { place in
                         MapAnnotation(coordinate: place.coordinate) {
                             PlaceAnnotationView()

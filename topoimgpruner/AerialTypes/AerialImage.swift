@@ -83,10 +83,10 @@ class AerialImage: ObservableObject, Identifiable {
                 break
         }
         switch longref {
-        case "W":
-            longitude *= -1
-        default:
-            break
+            case "W":
+                longitude *= -1
+            default:
+                break
         }
         
         coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
@@ -98,6 +98,5 @@ class AerialImage: ObservableObject, Identifiable {
             _alt = unwrapAlt
         }
         altitude = _alt
-        
     }
 }
