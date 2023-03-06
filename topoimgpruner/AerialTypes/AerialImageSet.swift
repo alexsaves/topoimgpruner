@@ -45,13 +45,13 @@ class AerialImageSet: ObservableObject {
             }
             isFirst = false
         }
-        print("Min coordinate: \(tmpbounds.min)")
-        print("Max coordinate: \(tmpbounds.max)")
+        //print("Min coordinate: \(tmpbounds.min)")
+        //print("Max coordinate: \(tmpbounds.max)")
         
         tmpbounds.mid.latitude = ((tmpbounds.max.latitude - tmpbounds.min.latitude) / 2) + tmpbounds.min.latitude
         tmpbounds.mid.longitude = ((tmpbounds.max.longitude - tmpbounds.min.longitude) / 2) + tmpbounds.min.longitude
         
-        print("Mid coordinate: \(tmpbounds.mid)")
+        //print("Mid coordinate: \(tmpbounds.mid)")
         return tmpbounds
     }
     
@@ -65,8 +65,6 @@ class AerialImageSet: ObservableObject {
         let latSpan:Double = max(abs(tmpBounds.max.latitude - tmpBounds.min.latitude) * 1.6, 0.005)
         let longSpan:Double = max(abs(tmpBounds.max.longitude - tmpBounds.min.longitude) * 1.6, 0.005)
         self.region = MKCoordinateRegion(center: tmpBounds.mid, span: MKCoordinateSpan(latitudeDelta: latSpan, longitudeDelta: longSpan))
-        print("INTERNAL CENTER: \(region.center)")
-        print("whosit")
     }
     
     init() {

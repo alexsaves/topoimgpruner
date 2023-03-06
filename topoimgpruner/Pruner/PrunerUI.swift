@@ -27,12 +27,7 @@ struct PrunerUI: View {
      */
     init(events:EventHandler, imgSetObj: AerialImageSet) {
         self.topEventHandler = events
-        //print("Region: \(imgSetObj.region)")
-        //region = imgSetObj.region
-        //region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 40.748433, longitude: -73.985656), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
         imgSet.region = imgSetObj.region
-        print("ABOUT TO RENDER: \(imgSetObj.region)")
-        //imgSet.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 40.748433, longitude: -73.985656), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
         imgSet.bounds = imgSetObj.bounds
         imgSet.images = imgSetObj.images
         if (imgSetObj.images.count > 0) {
@@ -42,18 +37,29 @@ struct PrunerUI: View {
     
     // Map marker definition
     struct PlaceAnnotationView: View {
-      var body: some View {
-        VStack(spacing: 0) {
-          Image(systemName: "mappin.circle.fill")
-            .font(.title)
-            .foregroundColor(.red)
-          
-          Image(systemName: "arrowtriangle.down.fill")
-            .font(.caption)
-            .foregroundColor(.red)
-            .offset(x: 0, y: -5)
+        // Holds a pointer to the image that this is associated with
+        let img:AerialImage
+        
+        // Constructor
+        init(forImg:AerialImage) {
+            img = forImg
         }
-      }
+        
+        // The view
+        var body: some View {
+            VStack(spacing: 0) {
+                Image(systemName: "mappin.circle.fill")
+                    .font(.title)
+                    .foregroundColor(.red)
+
+                Image(systemName: "arrowtriangle.down.fill")
+                    .font(.caption)
+                    .foregroundColor(.red)
+                    .offset(x: 0, y: -5)
+            }.onTapGesture(count: 1, perform: {
+                print("IT WORKS: \(img)")
+            })
+        }
     }
     
     // Render the view
@@ -64,7 +70,7 @@ struct PrunerUI: View {
                     coordinateRegion: $imgSet.region,
                     annotationItems: imgSet.images) { place in
                         MapAnnotation(coordinate: place.coordinate) {
-                            PlaceAnnotationView()
+                            PlaceAnnotationView(forImg:place)
                         }
                       }.layoutPriority(1)
                 ScrollView(.vertical, showsIndicators: true) {
