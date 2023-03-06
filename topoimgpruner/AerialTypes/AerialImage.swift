@@ -44,6 +44,18 @@ class AerialImage: ObservableObject, Identifiable {
     // The MapKit friendly coordinate
     @Published var coordinate:CLLocationCoordinate2D
     
+    // Empty initializer
+    init() {
+        url = URL(string: "/")!
+        width = 0
+        height = 0
+        exif = NSDictionary()
+        thumb = NSImage()
+        name = "/"
+        coordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
+        altitude = 0
+    }
+    
     // Constructor
     init(fileUrl: URL, imageWidth: Int32, imageHeight: Int32, gpsInfo:NSDictionary, exifData:NSDictionary, thumbImg: CIImage) {
         url = fileUrl

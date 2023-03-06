@@ -10,24 +10,23 @@ import SwiftUI
 struct ImgPicker: View {
     
     // Holds the image set
-    var imgSet: AerialImageSet
+    @ObservedObject var imgSet: AerialImageSet
+    
+    // Holds the selected item
+    @State var selectedItem:AerialImage = AerialImage()
     
     /**
      * Sets up a new instance
      */
-    init(forSet: AerialImageSet) {
+    init(forSet: AerialImageSet, selected: AerialImage) {
         imgSet = forSet
+        selectedItem = selected
     }
     
     var body: some View {
             VStack(spacing: 10) {
                 ForEach(imgSet.images) {img in
-                    Image(nsImage: img.thumb)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        //.scaledToFit()
-                        .frame(minWidth: 0, maxWidth: .infinity, maxHeight: 200)
-                        .cornerRadius(5)
+                    PickerItem(forImg: img, selected: (img === selectedItem))
                 }
             }.frame(minWidth: 0, maxWidth: .infinity)
         
@@ -36,6 +35,6 @@ struct ImgPicker: View {
 
 struct ImgPicker_Previews: PreviewProvider {
     static var previews: some View {
-        ImgPicker(forSet: AerialImageSet())
+        ImgPicker(forSet: AerialImageSet(), selected: AerialImage())
     }
 }

@@ -74,7 +74,7 @@ struct PrunerUI: View {
                         }
                       }.layoutPriority(1)
                 ScrollView(.vertical, showsIndicators: true) {
-                    ImgPicker(forSet: imgSet)
+                    ImgPicker(forSet: imgSet, selected: AerialImage())
                 }
                 .padding([.leading], 10)
                 .frame(minWidth: 300, maxWidth: .infinity)
