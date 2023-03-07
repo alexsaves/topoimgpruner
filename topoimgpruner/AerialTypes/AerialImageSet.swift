@@ -30,7 +30,6 @@ class AerialImageSet: ObservableObject {
         
         // Calculate the outer boundaries of the image set
         for img in images {
-            print("Marker coordinate: \(img.coordinate)")
             if isFirst || img.coordinate.latitude < tmpbounds.min.latitude {
                 tmpbounds.min.latitude = img.coordinate.latitude
             }
@@ -45,13 +44,8 @@ class AerialImageSet: ObservableObject {
             }
             isFirst = false
         }
-        //print("Min coordinate: \(tmpbounds.min)")
-        //print("Max coordinate: \(tmpbounds.max)")
-        
         tmpbounds.mid.latitude = ((tmpbounds.max.latitude - tmpbounds.min.latitude) / 2) + tmpbounds.min.latitude
         tmpbounds.mid.longitude = ((tmpbounds.max.longitude - tmpbounds.min.longitude) / 2) + tmpbounds.min.longitude
-        
-        //print("Mid coordinate: \(tmpbounds.mid)")
         return tmpbounds
     }
     
