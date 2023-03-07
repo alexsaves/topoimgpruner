@@ -48,13 +48,27 @@ struct PrunerUI: View {
         // Holds a pointer to the image that this is associated with
         let img:AerialImage
         
+        // Is this pin selected?
+        let isSelected: Bool
+        
         // Holds the Select image handler (called from map markers)
         private let _selectImgHandler: (AerialImage) -> Void
         
+        let itemColor:Color
+        
+        let sproxy:ScrollViewProxy
+        
         // Constructor
-        init(forImg:AerialImage, selectImage: @escaping (AerialImage) -> Void) {
+        init(forImg:AerialImage, sv:ScrollViewProxy, selected:Bool, selectImage: @escaping (AerialImage) -> Void) {
             img = forImg
             _selectImgHandler = selectImage
+            isSelected = selected
+            if (selected) {
+                itemColor = Color.white
+            } else {
+                itemColor = Color.red
+            }
+            sproxy = sv
         }
         
         // The view
@@ -62,14 +76,17 @@ struct PrunerUI: View {
             VStack(spacing: 0) {
                 Image(systemName: "mappin.circle.fill")
                     .font(.title)
-                    .foregroundColor(.red)
+                    .foregroundColor(itemColor)
 
                 Image(systemName: "arrowtriangle.down.fill")
                     .font(.caption)
-                    .foregroundColor(.red)
+                    .foregroundColor(itemColor)
                     .offset(x: 0, y: -5)
             }.onTapGesture(count: 1, perform: {
                 // Select image
+                withAnimation {
+                    sproxy.scrollTo(img.id)
+                }
                 _selectImgHandler(img)
             })
         }
@@ -78,20 +95,22 @@ struct PrunerUI: View {
     // Render the view
     var body: some View {
         if (imgSet.images.count > 0) {
-            HSplitView() {
-                Map(
-                    coordinateRegion: $imgSet.region,
-                    annotationItems: imgSet.images) { place in
-                        MapAnnotation(coordinate: place.coordinate) {
-                            PlaceAnnotationView(forImg:place, selectImage: selectImgFromMarker)
-                        }
-                      }.layoutPriority(1)
-                ScrollView(.vertical, showsIndicators: true) {
-                    ImgPicker(forSet: imgSet, selected: selectedImage)
+            ScrollViewReader { scrollView in
+                HSplitView() {
+                    Map(
+                        coordinateRegion: $imgSet.region,
+                        annotationItems: imgSet.images) { place in
+                            MapAnnotation(coordinate: place.coordinate) {
+                                PlaceAnnotationView(forImg:place, sv: scrollView, selected: (selectedImage === place), selectImage: selectImgFromMarker)
+                            }
+                        }.layoutPriority(1)
+                    ScrollView(.vertical, showsIndicators: true) {
+                        ImgPicker(forSet: imgSet, selected: selectedImage)
+                    }
+                    .padding([.leading], 10)
+                    .frame(minWidth: 300, maxWidth: .infinity)
                 }
-                .padding([.leading], 10)
-                .frame(minWidth: 300, maxWidth: .infinity)
-             }
+            }
         } else {
             VStack {
                 HStack {

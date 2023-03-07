@@ -23,25 +23,14 @@ struct ImgPicker: View {
         selectedItem = selected
     }
     
+    /**
+     * Renders the view
+     */
     var body: some View {
             VStack(spacing: 10) {
                 ForEach(imgSet.images) {img in
-                    if (selectedItem.id == img.id) {
-                        Image(nsImage: img.thumb)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(minWidth: 0, maxWidth: .infinity, maxHeight: 200)
-                            .border(.green)
-                            .cornerRadius(5)
-                    } else {
-                        Image(nsImage: img.thumb)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(minWidth: 0, maxWidth: .infinity, maxHeight: 200)
-                            .border(.red)
-                            .cornerRadius(5)
-                            
-                    }
+                    ImgThumbControl(img: img, selected: (selectedItem.id == img.id))
+                        .id(img.id)
                 }
             }.frame(minWidth: 0, maxWidth: .infinity)
         

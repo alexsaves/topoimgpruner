@@ -11,6 +11,7 @@
 		AA15B3BD29B250DB009035B1 /* GPSInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA15B3BC29B250DB009035B1 /* GPSInfo.swift */; };
 		AA15B3C329B25A6F009035B1 /* AerialImageSetBounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA15B3C229B25A6F009035B1 /* AerialImageSetBounds.swift */; };
 		AA15B3CF29B50B60009035B1 /* ImgPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA15B3CE29B50B60009035B1 /* ImgPicker.swift */; };
+		AA15B3D429B6E8C6009035B1 /* ImgThumbControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA15B3D329B6E8C6009035B1 /* ImgThumbControl.swift */; };
 		AA50FCDB29AE3ECD0086604B /* PrunerUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA50FCDA29AE3ECD0086604B /* PrunerUI.swift */; };
 		AA50FCDF29AE427B0086604B /* DirParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA50FCDE29AE427B0086604B /* DirParser.swift */; };
 		AA50FCE129AF10070086604B /* EventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA50FCE029AF10070086604B /* EventHandler.swift */; };
@@ -48,6 +49,7 @@
 		AA15B3BC29B250DB009035B1 /* GPSInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSInfo.swift; sourceTree = "<group>"; };
 		AA15B3C229B25A6F009035B1 /* AerialImageSetBounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AerialImageSetBounds.swift; sourceTree = "<group>"; };
 		AA15B3CE29B50B60009035B1 /* ImgPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgPicker.swift; sourceTree = "<group>"; };
+		AA15B3D329B6E8C6009035B1 /* ImgThumbControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgThumbControl.swift; sourceTree = "<group>"; };
 		AA50FCDA29AE3ECD0086604B /* PrunerUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrunerUI.swift; sourceTree = "<group>"; };
 		AA50FCDE29AE427B0086604B /* DirParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirParser.swift; sourceTree = "<group>"; };
 		AA50FCE029AF10070086604B /* EventHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHandler.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				AA15B3CE29B50B60009035B1 /* ImgPicker.swift */,
+				AA15B3D329B6E8C6009035B1 /* ImgThumbControl.swift */,
 			);
 			path = Picker;
 			sourceTree = "<group>";
@@ -354,6 +357,7 @@
 				AAEE394629AC27BC002E6CC5 /* topoimgprunerApp.swift in Sources */,
 				AA15B3C329B25A6F009035B1 /* AerialImageSetBounds.swift in Sources */,
 				AA50FCDB29AE3ECD0086604B /* PrunerUI.swift in Sources */,
+				AA15B3D429B6E8C6009035B1 /* ImgThumbControl.swift in Sources */,
 				AA50FCDF29AE427B0086604B /* DirParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
