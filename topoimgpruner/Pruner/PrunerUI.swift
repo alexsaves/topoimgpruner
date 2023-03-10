@@ -73,7 +73,11 @@ struct PrunerUI: View {
             if (selected) {
                 itemColor = Color.white
             } else {
-                itemColor = Color.red
+                if (forImg.isIncludedInBatch) {
+                    itemColor = Color.red
+                } else {
+                    itemColor = Color.gray
+                }
             }
             sproxy = sv
         }
