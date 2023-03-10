@@ -15,12 +15,16 @@ struct ImgPicker: View {
     // Holds the selected item
     @ObservedObject var selectedItem:AerialImage = AerialImage()
     
+    // Holds the Select image handler (called from map markers)
+    private let _selectImgHandler: (AerialImage) -> Void
+    
     /**
      * Sets up a new instance
      */
-    init(forSet: AerialImageSet, selected: AerialImage) {
+    init(forSet: AerialImageSet, selected: AerialImage, selectImage: @escaping (AerialImage) -> Void) {
         imgSet = forSet
         selectedItem = selected
+        _selectImgHandler = selectImage
     }
     
     /**
@@ -29,7 +33,7 @@ struct ImgPicker: View {
     var body: some View {
             VStack(spacing: 10) {
                 ForEach(imgSet.images) {img in
-                    ImgThumbControl(img: img, selected: (selectedItem.id == img.id))
+                    ImgThumbControl(img: img, selected: (selectedItem.id == img.id), selectImage: _selectImgHandler)
                         .id(img.id)
                 }
             }.frame(minWidth: 0, maxWidth: .infinity)
@@ -39,6 +43,8 @@ struct ImgPicker: View {
 
 struct ImgPicker_Previews: PreviewProvider {
     static var previews: some View {
-        ImgPicker(forSet: AerialImageSet(), selected: AerialImage())
+        ImgPicker(forSet: AerialImageSet(), selected: AerialImage(), selectImage: { (information: AerialImage) -> Void in
+            
+        })
     }
 }

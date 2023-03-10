@@ -52,7 +52,7 @@ struct PrunerUI: View {
         let isSelected: Bool
         
         // Holds the Select image handler (called from map markers)
-        private let _selectImgHandler: (AerialImage) -> Void
+        let _selectImgHandler: (AerialImage) -> Void
         
         let itemColor:Color
         
@@ -105,7 +105,7 @@ struct PrunerUI: View {
                             }
                         }.layoutPriority(1)
                     ScrollView(.vertical, showsIndicators: true) {
-                        ImgPicker(forSet: imgSet, selected: selectedImage)
+                        ImgPicker(forSet: imgSet, selected: selectedImage, selectImage: selectImgFromMarker)
                     }
                     .padding([.leading], 10)
                     .frame(minWidth: 300, maxWidth: .infinity)
