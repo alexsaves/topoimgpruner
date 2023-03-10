@@ -42,6 +42,9 @@ class AerialImage: ObservableObject, Identifiable {
     // The MapKit friendly coordinate
     @Published var coordinate:CLLocationCoordinate2D
     
+    // Is this included in the batch?
+    @Published var isIncludedInBatch:Bool = true
+    
     // Empty initializer
     init() {
         url = URL(string: "/")!

@@ -18,13 +18,17 @@ struct ImgPicker: View {
     // Holds the Select image handler (called from map markers)
     private let _selectImgHandler: (AerialImage) -> Void
     
+    // Holds the Select image handler (called from map markers)
+    private let _toggleIncludedHandler: (AerialImage) -> Void
+    
     /**
      * Sets up a new instance
      */
-    init(forSet: AerialImageSet, selected: AerialImage, selectImage: @escaping (AerialImage) -> Void) {
+    init(forSet: AerialImageSet, selected: AerialImage, selectImage: @escaping (AerialImage) -> Void, includeToggle: @escaping (AerialImage) -> Void) {
         imgSet = forSet
         selectedItem = selected
         _selectImgHandler = selectImage
+        _toggleIncludedHandler = includeToggle
     }
     
     /**
@@ -33,7 +37,7 @@ struct ImgPicker: View {
     var body: some View {
             VStack(spacing: 10) {
                 ForEach(imgSet.images) {img in
-                    ImgThumbControl(img: img, selected: (selectedItem.id == img.id), selectImage: _selectImgHandler)
+                    ImgThumbControl(img: img, selected: (selectedItem.id == img.id), isToggledOn: img.isIncludedInBatch, selectImage: _selectImgHandler, includeToggle: _toggleIncludedHandler)
                         .id(img.id)
                 }
             }.frame(minWidth: 0, maxWidth: .infinity)
@@ -44,6 +48,8 @@ struct ImgPicker: View {
 struct ImgPicker_Previews: PreviewProvider {
     static var previews: some View {
         ImgPicker(forSet: AerialImageSet(), selected: AerialImage(), selectImage: { (information: AerialImage) -> Void in
+            
+        }, includeToggle: { (information: AerialImage) -> Void in
             
         })
     }

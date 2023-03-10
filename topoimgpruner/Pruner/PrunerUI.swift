@@ -30,6 +30,13 @@ struct PrunerUI: View {
     }
     
     /**
+     * Master marker select image handler
+     */
+    private func toggleImgFromPicker(information:AerialImage) {
+        information.isIncludedInBatch = !information.isIncludedInBatch
+    }
+    
+    /**
      * Constructor
      */
     init(events:EventHandler, imgSetObj: AerialImageSet) {
@@ -105,7 +112,7 @@ struct PrunerUI: View {
                             }
                         }.layoutPriority(1)
                     ScrollView(.vertical, showsIndicators: true) {
-                        ImgPicker(forSet: imgSet, selected: selectedImage, selectImage: selectImgFromMarker)
+                        ImgPicker(forSet: imgSet, selected: selectedImage, selectImage: selectImgFromMarker, includeToggle: toggleImgFromPicker)
                     }
                     .padding([.leading], 10)
                     .frame(minWidth: 300, maxWidth: .infinity)
