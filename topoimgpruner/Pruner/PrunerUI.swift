@@ -34,6 +34,10 @@ struct PrunerUI: View {
      */
     private func toggleImgFromPicker(information:AerialImage) {
         information.isIncludedInBatch = !information.isIncludedInBatch
+        selectedImage = AerialImage()
+        Timer.scheduledTimer(withTimeInterval: 0.001, repeats: false) { timer in
+            selectedImage = information
+        }
     }
     
     /**
@@ -65,17 +69,26 @@ struct PrunerUI: View {
         
         let sproxy:ScrollViewProxy
         
+        let imgSrc:String
+        
         // Constructor
         init(forImg:AerialImage, sv:ScrollViewProxy, selected:Bool, selectImage: @escaping (AerialImage) -> Void) {
             img = forImg
             _selectImgHandler = selectImage
             isSelected = selected
             if (selected) {
-                itemColor = Color.white
+                itemColor = Color.yellow
+                if (forImg.isIncludedInBatch) {
+                    imgSrc = "mappin.circle.fill"
+                } else {
+                    imgSrc = "x.circle.fill"
+                }
             } else {
                 if (forImg.isIncludedInBatch) {
+                    imgSrc = "mappin.circle.fill"
                     itemColor = Color.red
                 } else {
+                    imgSrc = "x.circle.fill"
                     itemColor = Color.gray
                 }
             }
@@ -85,7 +98,7 @@ struct PrunerUI: View {
         // The view
         var body: some View {
             VStack(spacing: 0) {
-                Image(systemName: "mappin.circle.fill")
+                Image(systemName: imgSrc)
                     .font(.title)
                     .foregroundColor(itemColor)
 

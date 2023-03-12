@@ -21,13 +21,19 @@ struct TopoFileSelector: View {
     // Are we in a parsing state?
     @State var isParsing = false
     
+    // Are we in a export ready state?
+    @State var exportReady = false
+    
     // Messages the parse progress
     @State var parseProgress = NSLocalizedString("parseProgressInit", comment: "Default text for choosing a source")
     
+    // Holds the image set
+    @State var tempImgSet:AerialImageSet
+    
     /*
-     Launch the file selector
+     Launch the file selector for sourcing files
      */
-    private func browseFiles() -> String {
+    private func browseForSourceFiles() -> String {
         let panel = NSOpenPanel()
         panel.allowsMultipleSelection = false
         panel.canChooseDirectories = true
@@ -38,6 +44,23 @@ struct TopoFileSelector: View {
             return panel.url?.path ?? ""
         }
         return folderName
+    }
+    
+    /*
+     Launch the file selector for exporting files
+     */
+    private func browseForExportFiles() -> String {
+        let panel = NSOpenPanel()
+        panel.allowsMultipleSelection = false
+        panel.canChooseDirectories = true
+        panel.canChooseFiles = false
+        panel.canCreateDirectories = true
+        panel.title = NSLocalizedString("chooseExortDefault", comment: "File picker root folder title")
+        panel.message =  NSLocalizedString("chooseExportRootFolderLong", comment: "File picker root folder title long description")
+        if panel.runModal() == .OK {
+            return panel.url?.path ?? ""
+        }
+        return ""
     }
     
     // Holds the error handler
@@ -70,6 +93,7 @@ struct TopoFileSelector: View {
     private func handleFinishParse(information:Any?) {
         isParsing = false
         if let imgSet = information as? AerialImageSet {
+            tempImgSet = imgSet
             _parseReadyHandler(imgSet)
         } else {
             _errorHandler(NSLocalizedString("emptyImageSet", comment: "Message for empty image set"))
@@ -82,6 +106,7 @@ struct TopoFileSelector: View {
     init(errorHandler: @escaping (String) -> Void, imgSetReadyHandler: @escaping (AerialImageSet) -> Void) {
         _errorHandler = errorHandler
         _parseReadyHandler = imgSetReadyHandler
+        tempImgSet = AerialImageSet()
     }
     
     /*
@@ -90,7 +115,7 @@ struct TopoFileSelector: View {
     var body: some View {
         HStack {
             Button(NSLocalizedString("srcFolderButton", comment: "Choose a source folder button label")) {
-                folderName = browseFiles()
+                folderName = browseForSourceFiles()
                 if folderName.count > 0 {
                     parseReady = true
                 } else {
@@ -111,9 +136,17 @@ struct TopoFileSelector: View {
                         parser.events.subscribeTo(eventName: "progress", action:handleProgress)
                         parser.events.subscribeTo(eventName: "parseDone", action:handleFinishParse)
                         parser.parse()
+                        exportReady = true
                     }
                 }.disabled(!parseReady)
-                Button(NSLocalizedString("exportButton", comment: "Button for exporting a project")) {}.disabled(true)
+                Button(NSLocalizedString("exportButton", comment: "Button for exporting a project")) {
+                    // Choose a destination
+                    let exportfolderName:String = browseForExportFiles()
+                    if (exportfolderName.count > 1) {
+                        let exporter:ImgExporter = ImgExporter(imgset: tempImgSet)
+                        exporter.export(destination:exportfolderName)
+                    }
+                }.disabled(!exportReady)
             }.frame(maxWidth: .infinity, alignment: .trailing)
         }
     }

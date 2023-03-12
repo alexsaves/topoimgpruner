@@ -16,3 +16,6 @@
 "parseProgress" = "Parsing:";
 "emptyImageSet" = "Found no parseable images";
 "missingMapsAPIKey" = "A Google Maps API key was not found. Looked for: ";
+"chooseExortDefault" = "[Choose an export folder]";
+"chooseExportRootFolder" = "Choose an export folder";
+"chooseExportRootFolderLong" = "Choose a folder to write destination images";
