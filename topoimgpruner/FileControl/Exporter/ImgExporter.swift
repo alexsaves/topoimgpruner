@@ -45,14 +45,14 @@ class ImgExporter {
             if (img.isIncludedInBatch) {
                 let fileStr:String = generateDestinationImageFilename(img: img)
                 let finalDestLocationStr:String = "\(destination)/\(fileStr)"
-                //let finalDestURL:URL = URL(fileURLWithPath:finalDestLocationStr)
-                let finalDestURL:URL = URL(fileURLWithPath:"\(destination)/out.jpg")
+                let finalDestURL:URL = URL(fileURLWithPath:finalDestLocationStr)
+                //let finalDestURL:URL = URL(fileURLWithPath:"\(destination)/out.jpg")
                 do {
                     // Get the saved data
                     let savedData = try Data(contentsOf: img.url)
                     
                     // Write
-                    try savedData.write(to: finalDestURL)
+                    try! savedData.write(to: finalDestURL)
                     
                     print("File saved: \(finalDestURL.absoluteURL)")
                 } catch {
